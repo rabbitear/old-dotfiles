@@ -1,0 +1,40 @@
+
+                             mntnoe's second fvwm
+                             ====================
+
+This is a 100 % keyboard driven Fvwm config. It aims to make window handling
+efficient by making the keyboard commands easy to hit.
+
+All window handling uses the AltGr (right Alt on the US keyboard) key as
+modifier, to avoid conflicts with applications. AltGr is easy to reach, but
+seldom used, except for local characters. The most frequently used commands are
+the easiest to hit. For example, instead of using CTRL-F1,F2,F3,F4 to switch
+workspace, AltGr-U,I,O,P is used instead. The "root menu" is called with
+AltGr-L.
+
+The window titlebar is replaced by a colored border; the color which depends on
+the application. This actually improves the readability (IMHO), as the "real"
+information comes closer to each other. Also it uses less screen space which is
+crucial on a 12" laptop :-)
+
+The patch modules/FvwmRearrange-disable_title_check.patch makes FvwmRearrange
+work when the windows have no titlebar.
+
+Feedback will be appreciated. You can mail me at mntnoe (@) gmail.com or post a
+comment on my blog (mntnoe.com).
+
+Happy tweaking,
+
+Mads N Noe
+
+---
+
+BUGS
+
+- Sometimes, when two windows are aligned, the Pack* functions seems to ignore
+  the other window.
+
+- I get some Internal Error: Request 33, Error 10, EventType 0 errors.
+  They doesn't seem to cause trouble, however.
+
+vim: set ft=text:

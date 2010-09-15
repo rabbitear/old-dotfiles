@@ -1,0 +1,8 @@
+# programs used with these scripts
+
+fvwm
+surf
+xprop
+xclip
+rox-filer
+

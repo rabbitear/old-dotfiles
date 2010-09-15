@@ -1,0 +1,84 @@
+
+# Keys for the Root Window
+Mouse 1         R       A       -
+Mouse 2         R       A       WindowList
+Mouse 3         R       A       Exec xset r rate 175 60;xterm -tn xterm \
+		 +sb -j -s -sl 1000 -geometry 48x9 -fg wheat \
+                -fn "-b&h-*-medium-r-*-*-14-100-*-*-m-*-*-*" \
+                -bg rgb:29/18/12 &
+
+# Styles for these Menus
+DestroyMenuStyle "*" 
+MenuStyle "*" BorderWidth 0, Foreground $[COLOR], \
+	background black, HilightBack rgb:03/05/21, TitleFont "xft:Swift-18", \
+	Hilight3DOff, Font "xft:Comic Sans MS-13", \
+	ActiveFore indianred, MenuFace VGradient 128 $[ROOT_BG] black
+
+# Menu Definitions
+
+DestroyMenu "SurfMenu"
+AddToMenu "SurfMenu" "-/\\\\/\\\\- SURF -/\\\\/\\\\-" title
++ "         ** surf **         " Exec exec $[HOME]/.fvwm/bin/surf-google.sh
++ "" Nop
++ " - omploader" Exec exec surf omploader.org
++ " - freshmeat.net " Exec exec surf www.freshmeat.net
++ " - slashdot.org " Exec exec surf slashdot.org
++ " - youtube.com " Exec exec surf youtube.com
++ " - craigslist.org " Exec exec surf anchorage.craigslist.org
++ " - facebook.com " Exec exec surf facebook.com
++ " - reddit.com " Exec exec surf reddit.com
++ " - twitter.com " Exec exec surf twitter.com
++ " - thepiratebay.com " Exec exec surf thepiratebay.com
++ " - easynews.com " Exec exec surf www.easynews.com
++ " - hackaday.com " Exec exec surf hackaday.com
++ "" Nop
++ "FireFox (tm)"%netscape.xpm% Exec exec firefox
++ "" Nop
++ "sKypE!"%skype.png% Exec exec skype
+
+DestroyMenu "ToolsMenu"
+AddToMenu "ToolsMenu" "  <^>== TOOLS ==<^>  " title
++ "   **  F i L e S  **   "%folder.png% Exec exec nautilus --no-desktop
++ "" Nop
++ " Gnome-NetTool"%network.xpm% Exec exec gnome-nettool
++ " Sound Recorder"%sound.xpm% Exec exec gnome-sound-recorder
++ " Sound Volumn"%sound.png% Exec exec gnome-alsamixer
++ "" Nop
++ " gtk2fontsel" Exec exec gtk2fontsel
++ " gcolor2" Exec exec gcolor2
++ "" Nop
++ "-LOCK THE SCREEN-"%lock.xpm% Exec exec xscreensaver-command -lock
+
+DestroyMenu "TermMenu"
+AddToMenu "TermMenu" "  [o]== SHELLS ==[o]  " title
++ "     ** xTeRm **     " Exec xset r rate 175 60;xterm -tn xterm +sb -j -s \
+-fn "-b&h-*-medium-r-*-*-14-100-*-*-m-*-*-*" -sl 1000 \
+-geometry 80x16 -fg yellow -bg rgb:29/18/12 &
++ "" Nop
++ " SSH: BreadBox" Exec xset r rate 175 60;xterm -tn xterm +sb -j -s \
+        -fn "-b&h-*-medium-r-*-*-14-100-*-*-m-*-*-*" \
+        -geometry 80x16 -fg yellow -bg rgb:29/18/12 -sl 0 \
+	-T BREADBOX-ssh -e ssh juice@breadbox 
++ " SSH: Studio-B" Nop
++ " SSH: sdf.lonestar.org" Exec xset r rate 175 60;xterm -tn xterm +sb -j -s \
+        -fn "-b&h-*-medium-r-*-*-14-100-*-*-m-*-*-*" \
+        -geometry 80x16 -fg yellow -bg rgb:29/18/12 -sl 0 \
+        -T BREADBOX-ssh -e ssh kreator@sdf.lonestar.org
++ "" Nop
++ "aTeRm (whitebg)"%terminal.png% Exec exec aterm -rv
++ "Fvwm Console" Module FvwmConsole -g 30x6+10-10 -fn 8x8 +sb -terminal xterm -bg sienna4 -fg indianred2
+
+DestroyMenu "CalcMenu"
+AddToMenu "CalcMenu" "<++ CALC ++>" title
++ "     ** CALC **     "%calculator.png% Exec exec xcalc
++ "  Gnome-Calculator  " Exec exec gnome-calculator
++ "" Nop
++ "GnuCash"%gnucash-icon-16x16.png% Exec exec gnucash
++ "MoneyDance"%moneydance.png% Exec exec /opt/Moneydance/Moneydance
++ "Docs for MoneyDance"%help.xpm% Exec exec evince ~/Documents/Moneydance_2010_users_guide.pdf
++ "" Nop
++ "OOo WRiTeR"%ooo-writer.png% Exec exec oowriter
++ "OOo CaLc"%ooo-calc.png% Exec exec oocalc
++ "GiMp"%gimp.png% Exec exec gimp
++ "g-laBeLs" Exec exec glabels
+
