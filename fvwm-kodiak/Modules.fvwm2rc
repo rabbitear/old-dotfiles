@@ -1,0 +1,90 @@
+# Resources for Modules
+#*FvwmPagerBack #150525
+
+Style "FvwmPager*"     BorderWidth 0, WindowListSkip, \
+NoTitle, NoHandles, Sticky
+
+Style "FvwmIconMan*"     BorderWidth 0, WindowListSkip, \
+NoTitle, HandleWidth 0, Sticky
+
+Style "FvwmButtons*" StaysOnBottom, BorderWidth 0, WindowListSkip, \
+NoTitle, HandleWidth 0, Sticky, CirculateSkip
+
+# background was rgb:29/18/12
+DestroyModuleConfig FvwmIconMan: *
+*FvwmIconMan: NumManagers 1
+*FvwmIconMan: Title "..."
+*FvwmIconMan: Resolution  page
+*FvwmIconMan: Background  $[ROOT_BG]
+*FvwmIconMan: Foreground  darkkhaki
+*FvwmIconMan: Font        5x7
+*FvwmIconMan: Format      "%t"
+*FvwmIconMan: UseWinList  true
+*FvwmIconMan: DrawIcons   false
+*FvwmIconMan: Shape	  false
+*FvwmIconMan: FollowFocus true
+*FvwmIconMan: Sort        none
+*FvwmIconMan: PlainButton           flat indianred $[ROOT_BG]
+*FvwmIconMan: SelectButton          flat indianred $[ROOT_BG]
+*FvwmIconMan: FocusButton           flat darkkhaki $[ROOT_BG]
+*FvwmIconMan: FocusAndSelectButton  flat darkkhaki $[ROOT_BG]
+*FvwmIconMan: TitleButton           flat indianred $[ROOT_BG]
+*FvwmIconMan: ReliefThickness 0
+*FvwmIconMan: ButtonGeometry 415x0
+*FvwmIconMan: ManagerGeometry 1x3+267+0
+*FvwmIconMan: Action Mouse 0 A sendcommand Iconify
+
+# Pager for being swallowed into the buttonbar
+DestroyModuleConfig FvwmPager: *
+*FvwmPager: Back $[ROOT_BG]
+*FvwmPager: Fore darkkhaki
+*FvwmPager: Font none
+*FvwmPager: Hilight indianred
+*FvwmPager: DeskTopScale 64
+*FvwmPager: Geometry 118x31+0+0
+*FvwmPager: Label 0 Pager
+*FvwmPager: SmallFont none
+*FvwmPager: Columns 1
+*FvwmPager: Rows 1
+*FvwmPager: Balloons 
+*FvwmPager: UseSkipList
+*FvwmPager: Balloons Pager
+*FvwmPager: Balloonfore indianred2
+
+# FvwmIdent is an xwininfo replacement.
+DestroyModuleConfig FvwmIdent: *
+*FvwmIdent: Back MidnightBlue
+*FvwmIdent: Fore #f6f6f6
+*FvwmIdent: Font "xft:snap"
+
+# the button bar at the top
+DestoryModuleConfig FvwmButtons: *
+*FvwmButtons: ButtonGeometry 32x32
+*FvwmButtons: Back $[ROOT_BG]
+*FvwmButtons: Fore green
+*FvwmButtons: Rows 1
+*FvwmButtons: Font 8x8
+*FvwmButtons: Frame 0
+*FvwmButtons: Padding 0 0
+*FvwmButtons: (3x1, Swallow "xosview" `Exec xosview &`)
+*FvwmButtons: (1x1, Icon referencer.png, \
+	Action (Mouse 0) `Popup SurfMenu Rectangle +$left+33 0 0m`)
+*FvwmButtons: (1x1, Icon utilities-terminal.png, \
+	Action (Mouse 0) `Popup ToolsMenu Rectangle +$left+33 0 0m`)
+*FvwmButtons: (1x1, Icon system-file-manager.png, \
+	Action (Mouse 0) `Popup BooksMenu Rectangle +$left+33 0 0m`)
+*FvwmButtons: (1x1, Icon accessories-calculator.png, \
+	Action (Mouse 0) `Popup CalcMenu Rectangle +$left+33 0 0m`)
+*FvwmButtons: (19x1, Swallow "FvwmIconMan" `FvwmIconMan`)
+*FvwmButtons: (2x1, Swallow "stalonetray" `Exec exec stalonetray \
+	--no-shrink -bg $[ROOT_BG] --grow-gravity SE --icon-size 16 \
+	--icon-gravity SE &`)
+*FvwmButtons: (3x1, Swallow "FvwmPager" `FvwmPager *`)
+*FvwmButtons: (1x1, Container(Rows 2,Frame 0))
+*FvwmButtons: (Swallow "xclock" `Exec exec \
+	xclock -digital -padding 0 -brief \
+	-bg indianred -fg black -face "Luxi Serif-8"`
+*FvwmButtons: (Swallow "xeyes" `Exec exec \
+	xeyes -center indianred -fg black`)
+*FvwmButtons: (End)
+

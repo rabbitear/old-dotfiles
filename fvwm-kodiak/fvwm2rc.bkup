@@ -1,0 +1,231 @@
+#######################################################
+###  Calomel.org .fvwm2rc   BEGIN
+#######################################################
+# System configuration file for Fvwm2 ( .fwm2rc )
+#
+
+# Paths
+ImagePath      $HOME/.fvwm/wm-icons/22x22-gartoon:$HOME/.fvwm/wm-icons/14x14-general
+ModulePath      $FVWM_MODULEDIR:$HOME/fvwm-modules
+SetEnv BGCOLOR rgb:05/05/30
+
+# 'rubber-band' window-borders when moving and resizing windows.
+XORvalue 208
+
+# Make our windows snap-up against other windows and make icons snap
+# up against other icons
+EwmhBaseStruts 0 0 42 0
+
+# Font configuration
+WindowFont      -adobe-helvetica-bold-r-*-*-12-*-*-*-*-*-*-*
+IconFont        -adobe-helvetica-bold-r-*-*-10-*-*-*-*-*-*-*
+
+# HighlightColor
+HilightColor  linen SteelBlue4
+
+# BorderStyle
+BorderStyle Active Solid SteelBlue4 -- NoInset HiddenHandles
+BorderStyle Inactive Solid #11236b -- NoInset HiddenHandles
+
+# TitleStyle
+TitleStyle ActiveUp Solid SteelBlue4 -- flat
+TitleStyle ActiveDown Solid SteelBlue4 -- flat
+TitleStyle Inactive Solid #11236b -- flat
+
+# The Second Variation of TitleStyle:
+TitleStyle LeftJustified height 18
+
+# Button Styles
+ButtonStyle All -- UseTitleStyle flat
+#ButtonStyle 1 14 20x20@1 20x70@1 70x70@0 70x20@0 20x20@1 60x60@0 60x50@0 60x60@0 50x60@0 60x60@0 60x80@0 80x80@0 80x60@0 60x60@0
+ButtonStyle 1 MiniIcon
+ButtonStyle 2 Pixmap window-delete.xpm
+ButtonStyle 3 Pixmap window-identify.xpm
+ButtonStyle 4 12 50x10@1 25x35@1 40x35@1 40x60@1 25x60@1 50x85@1 75x60@0 60x60@0 60x35@0 75x35@0 50x10@0 50x10@1 
+ButtonStyle 5 Pixmap window-stick.xpm
+ButtonStyle 6 12 10x50@1 35x25@1 35x40@1 65x40@1 65x25@1 90x50@1 65x75@0 65x60@0 35x60@0 35x75@0 10x50@0 10x50@1
+ButtonStyle 7 Pixmap video.xpm
+ButtonStyle 8 Pixmap window-raise.xpm
+
+# MenuStyle 
+MenuStyle * background #455561, ActiveFore #ccfcf0, ForeGround black
+MenuStyle * popupoffset 0 100
+MenuStyle * MenuFace HGradient 64 1 #758591 100 #102030, Animation
+
+# Set up some desktop options
+DesktopSize     3x1
+
+# EdgeScroll horizontal vertical
+EdgeScroll      100 100
+
+#wait before to change the page: wait 190milliseconds.
+#EdgeResistance 190 0
+#x 100000 --> swap (so 100% and swap (x100))
+#EdgeScroll 100000 100000
+EdgeThickness 1
+#what to do when the mouse hits the Edge
+#EdgeCommand Right Next (ButtonDocks) Raise
+#EdgeCommand Bottom Menu MainMenu
+EdgeCommand North WindowList -50p +0p
+EdgeCommand Bottom ToggleConsole
+#when the mouse hits the left edge, there will be edgescroll
+
+#that function gets called with the WindowList
+#that also assures the pointer will be at pos +80/+15 within the windows
+DestroyFunc WindowListFunc
+AddToFunc WindowListFunc
++ I WindowId $0 Iconify off
++ I WindowId $0 FlipFocus
++ I WindowId $0 Raise
++ I WindowId $0 WarpToWindow +80p +35p
+
+DestroyFunc ToggleConsole
+AddToFunc ToggleConsole
++ I All (FvwmConsole) Close
++ I TestRc (NoMatch) Module FvwmConsole -g 30x6+10-10 -fn 5x8 +sb \
+	-terminal rxvt -bg rgb:05/05/30 -fg blue
+
+# OpaqueMoveSize percentage
+OpaqueMoveSize 1
+
+# New Styles
+Style * EdgeMoveDelay 220
+Style * EdgeMoveResistance 0
+Style * SnapAttraction 20 SameType
+
+# Style related options
+Style "*" ForeColor grey40
+Style "*" BackColor #11236b
+Style "*" SmartPlacement, CleverPlacement
+Style "*" StickyIcon
+#Style "*" IconBox       5 -50 -134 -5
+Style "*" IconBox       -5 -290 -134 -5
+Style "*" BorderWidth 5, HandleWidth 5
+Style "*" NoPPosition
+Style "*" NakedTransient
+Style "*" SloppyFocus, MouseFocusClickRaises
+Style "*" ResizeOutline
+
+# Some Fvwm-Related Styles
+Style "FvwmWinList"     NoTitle
+Style "FvwmPager"     StaysOnBottom, BorderWidth 0, WindowListSkip, \
+	NoTitle, NoHandles, Sticky
+Style "*Dialog_popup" WindowListSkip
+Style "FvwmConsole" StaysOnTop, Sticky, NoTitle, WindowListSkip, !Handles, \
+	BorderWidth 6
+
+# Custom styles - STYLES
+style "xclock" NoTitle, BorderWidth 0, HandleWidth 0, StaysOnBottom, \
+	Sticky, WindowListSkip
+style "xosview" NoTitle, BorderWidth 0, HandleWidth 0, StaysOnBottom, \
+	Sticky, WindowListSkip
+style "xterm"   BorderWidth 6, Handlewidth 6,MiniIcon terminal.xpm
+Style "wireshark" MiniIcon monitoring.xpm
+Style "xcalc" MiniIcon calculator.xpm
+Style "xmag" MiniIcon viewer.xpm
+Style "Xman" MiniIcon help.xpm
+Style "xscreensaver*" MiniIcon unknown.xpm
+
+# Resources for Modules
+#*FvwmPagerBack #150525
+*FvwmPagerBack $BGCOLOR
+*FvwmPagerFore #484058
+*FvwmPagerFont none
+*FvwmPagerHilight #908090
+*FvwmPagerDeskTopScale 64
+*FvwmPagerGeometry 118x31+0+0
+*FvwmPagerLabel 0 Pager
+*FvwmPagerSmallFont none
+*FvwmPagerColumns 1
+*FvwmPagerRows 1
+*FvwmPagerBalloons 
+*FvwmPagerUseSkipList
+*FvwmPagerBalloons Pager
+*FvwmPagerBalloonfore white
+
+# Function definitions
+AddToFunc "Move-or-Raise" "M" Move
++              "M" Raise
++              "C" Raise
++              "D" WindowShade
+
+AddToFunc "Move-or-Iconify" "M" Move
++              "D" Iconify
++              "C" RaiseLower
+
+AddToFunc "Resize-or-Raise" "M" Resize
++              "M" Raise
++              "C" Raise
++              "D" RaiseLower
+
+AddToFunc "InitFunction" 
++       I Exec xsetroot -solid $BGCOLOR
++	I Module FvwmPager *
++	I Exec ~/.fvwm/bin/xclock -digital -fg rgb:90/80/90 -geometry -0+0 \
+		-bg black -update 1 -fn -bitstream-*-bold-r-*-*-25-*-*-*-*-*-*-*
++       I Exec xscreensaver &
++       I Desk 0 0
++	I Exec xosview -geometry +122+0 &
++       I Exec exec Esetroot -scale ~/.fvwm/backgrounds/MistyMorning.jpg
+
+AddToFunc "Maximize_func" "M" Maximize 0 100
++              "C" Maximize 0 80
++              "D" Maximize 100 100
+
+# Key bindings
+
+# Mouse bindings
+#     Button    Context Modifi  Function
+Mouse 1         R       A       -
+Mouse 3         R       A       Menu "MainMenu" Nop
+Mouse 2         R       A       WindowList
+Mouse 4         R       A       Menu Nop
+Mouse 5         R       A       Menu Nop
+Mouse 1         1       N       Menu "MainMenu" Close
+Mouse 1         3       N       Module FvwmIdent
+Mouse 1         5       N       Stick
+Mouse 1         7       N       Exec exec nautilus \
+			--no-desktop /home/kreator/.fvwm/wm-icons/14x14-general
+Mouse 1         I       N       Function "Move-or-Iconify"
+Mouse 1         8       N       Iconify
+Mouse 1         4       N       Maximize 0 100
+Mouse 1         6       N       Maximize 100 0
+Mouse 1         2       N       Delete
+Mouse 1         SF      N       Function "Resize-or-Raise"
+Mouse 1         T       N       Function "Move-or-Raise"
+
+# Menu Definitions
+AddToMenu "MainMenu"
++       "" Nop
++       "xTeRm" Exec xset r rate 175 60;xterm -tn xterm -r -fn 8x16 \
+		+sb -j -s -sl 1000 -geometry 80x16 -rv &
++	"Surf" Exec exec surf http://www.google.com &
++	"" Nop
++       "fiRefoX" Exec exec firefox &
++       "xCalc" Exec exec xcalc &
++       "FiLeS" Exec exec nautilus --no-desktop &
++       "" Nop
++	"Ebooks" Popup Ebooks
++	"Apps" Popup "/Debian"
++       "uTiLs" Popup Utils
++       "" Nop
+
+AddToMenu "Utils"
++	"" Nop
++  	"Console" Module FvwmConsole -g 30x6+10-10 -fn 5x8 +sb -terminal rxvt \
+		-bg rgb:05/05/30 -fg blue
++	"Log Viewer" Exec exec gnome-system-log &
++	"" Nop
++	"MiniTube" Exec exec minitube
++       "XLock" Exec exec xscreensaver-command -lock
++	"" Nop		
+AddToMenu "Ebooks"
++	"Win2003 Networking" Exec exec evince ~/Documents/eBook-Win2003.pdf
++	"Gettting Real 37 signals" Exec exec evince \
+		/home/kreator/Documents/gettingreal1.pdf
+
+Style "*" NoIcon
+#######################################################
+###  Calomel.org .fvwm2rc  END
+#######################################################
+
