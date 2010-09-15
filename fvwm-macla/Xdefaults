@@ -1,0 +1,27 @@
+#xosview -captions +cpu +load -mem -swap -battery -gfx +net -page -disk -int -font 5x7 --background rgb:05/05/30 -fg \#908090
+# Inactive #11236b
+xosview*captions: False
+xosview*labels: True
+xosview*meterLabelColor: darkkhaki
+xosview*usedlabels: True
+xosview*usedLabelColor: indianred
+xosview*font: 5x7
+xosview*background: rgb:58/64/36
+xosview*foreground: rgb:58/64/36
+xosview*enableStripple: False
+xosview*net: True
+xosview*netBandwidth: 183100
+xosview*netBackground: darkkhaki
+xosview*netIface: False
+xosview*load: True
+xosview*loadCpuSpeed: True
+xosview*loadIdleColor: darkkhaki
+xosview*cpu: True
+xosview*cpuFreeColor: darkkhaki
+xosview*mem: False
+xosview*swap: False
+xosview*page: False
+xosview*gfx: False
+xosview*interrupts: False
+xosview*disk: False
+

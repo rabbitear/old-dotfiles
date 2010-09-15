@@ -1,0 +1,113 @@
+#######################################
+## Kreator's Config
+######################
+
+###################
+## General Stuff ##
+###################
+ImagePath $HOME/.fvwm/my-icons:$HOME/.fvwm/wm-icons/22x22-gartoon:$HOME/.fvwm/wm-icons/14x14-general
+ClickTime 550
+EwmhBaseStruts 0 0 34 0
+DesktopSize     3x2
+EdgeScroll      100 100
+EdgeThickness 1
+EdgeCommand Bottom ToggleConsole
+
+#########################
+## Basic Color Schemes ##
+#########################
+
+SetEnv COLOR      khaki
+SetEnv HICOLOR    indianred
+SetEnv FG_COLOR   black     # LightBrown
+SetEnv FG_HICOLOR darkolivegreen1        # DarkBrown
+
+#SetEnv ROOT_BG    rgb:69/35/22 # red brown?
+#SetEnv ROOT_BG    rgb:05/05/30 # darkmidnight
+#SetEnv ROOT_BG    rgb:62/2F/3B # purple
+#SetEnv ROOT_BG    rgb:50/30/20 # a dark red
+SetEnv ROOT_BG    rgb:58/64/36
+SetEnv ROOT_FG	  darkkhaki
+
+#####################
+## Read In Configs ##
+#####################
+# -decor-
+Read Win.fvwm2rc
+# -menus-
+Read Menu.fvwm2rc
+# -modules-
+Read Modules.fvwm2rc
+#########################
+## Styles For Non-Apps ##
+#########################
+# General Non-App Styles (New)
+Style * EdgeMoveDelay 220
+Style * EdgeMoveResistance 1
+Style * SnapAttraction 8
+# General Non-App Styles (old)
+Style * SloppyFocus, MouseFocusClickRaises
+Style * SmartPlacement, CleverPlacement
+# Fvwm Appish Styles
+Style "FvwmWinList"     NoTitle
+Style "*Dialog_popup" WindowListSkip
+Style "FvwmConsole" StaysOnTop, Sticky, NoTitle, WindowListSkip, \
+	!Handles, BorderWidth 6
+
+#####################
+## Styles for Apps ##
+#####################
+style "xclock" NoTitle, BorderWidth 0, HandleWidth 0, StaysOnBottom, \
+Sticky, WindowListSkip
+style "xosview" NoTitle, BorderWidth 0, HandleWidth 0, StaysOnBottom, \
+Sticky, WindowListSkip
+style "xterm"   BorderWidth 6, Handlewidth 6,MiniIcon terminal.xpm
+Style "wireshark" MiniIcon monitoring.xpm
+Style "xcalc" MiniIcon calculator.xpm
+Style "xmag" MiniIcon viewer.xpm
+Style "Xman" MiniIcon help.xpm
+Style "xscreensaver*" MiniIcon unknown.xpm
+
+
+
+###############
+## Functions ##
+###############
+
+# Init happens at Initial startup only
+AddToFunc InitFunction 
++ I Exec ~/.fvwm/bin/xclock -digital -fg darkkhaki -geometry -0-13 \
+	-bg black -update 4 -fn "-bitstream-*-bold-r-*-*-25-*-*-*-*-*-*-*"
++ I Exec xscreensaver &
++ I Desk 0 0
+#+ I Exec xosview -geometry +122+0 &
+
+# Start happens when restart
+AddToFunc StartFunction
++ I Module FvwmButtons
++ I Exec xsetroot -solid ${ROOT_BG} &
++ I Exec Esetroot -scale \
+	~/.fvwm/backgrounds/Mmm___Hot_Chocolate_Wallpaper_by_tennyo_ceres.jpg &
+#+ I Exec Esetroot -scale ~/.fvwm/backgrounds/eclipse9.jpg &
+#+ I Exec exec checkgmail
+#+ I Exec exec pidgin
+
+
+#that function gets called with the WindowList
+#that also assures the pointer will be at pos +80/+15 within the windows
+DestroyFunc WindowListFunc
+AddToFunc WindowListFunc
++ I WindowId $0 Iconify off
++ I WindowId $0 FlipFocus
++ I WindowId $0 Raise
++ I WindowId $0 WarpToWindow +80p +35p
+
+DestroyFunc ToggleConsole
+AddToFunc ToggleConsole
++ I All (FvwmConsole) Close
++ I TestRc (NoMatch) Module FvwmConsole -g 30x6+10-10 -fn 5x8 +sb -terminal xterm -bg sienna4 -fg indianred2
+
+
+Style * NoIcon
+
+
