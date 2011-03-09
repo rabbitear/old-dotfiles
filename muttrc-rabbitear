@@ -1,0 +1,178 @@
+# kreator's Muttrc
+# works with Gmail, has some nice 256 colors.
+# I use the rxvt-unicode 256 color version, which is just urxvt
+# with a 256 color patch.
+
+# ktr - set the shell environment variables 
+#       EMAIL should be the complete gmail email address.
+#       PASSWD should be your gmail password.
+# ktr - if you leave the variables blank, mutt will ask
+#       you when you username which should be your full
+#       email address and password, at the start.
+# ktr - this was already in my distro, which is Archlinux.
+source /etc/Muttrc.gpg.dist
+
+# Gmail IMAP interface
+set imap_user = $EMAIL
+set imap_pass = $PASSWD
+set spoolfile = imaps://imap.gmail.com:993/INBOX
+set folder = imaps://imap.gmail.com:993
+# ktr - changing the postponed directory to a local directory.
+#       this is so if there is no connection it doesn't lag.
+#set postponed=”imaps://imap.gmail.com/[Gmail]/Drafts”
+set postponed="~/.mutt/postponed"
+# ktr - this next line speeds up imap with a cache.
+set header_cache=”~/.mutt/cache/headers”
+set message_cachedir=”~/.mutt/cache/bodies”
+set certificate_file=~/.mutt/certificates
+set imap_keepalive = 300
+# ktr - don't mark mail as read whenever fetch mail from server.
+set imap_peek = no
+# ktr - deeper pipeline makes imap feel faster (default:15)
+#       set this to 0 if having problems with that server.
+set imap_pipeline_depth = 30
+
+# mostly SMTP configuration to send thru Gmail
+set smtp_url = "smtp://weatchu@smtp.gmail.com:587/"
+set smtp_pass = $PASSWD
+set from = $EMAIL
+set realname = "Jon Bradley"
+
+# This is to use Google Contacts with mutt, it
+# will do tab completion, YAY, and you can use
+# the 'a' key to add 'sender' to the Gmail Contacts.
+#    --- notes: ---
+# You need to have 'goobook' package installed.
+# setup the file called .netrc with this:
+# ---------------------------
+# machine google.com
+#   login your@google.email
+#   password secret
+# ---------------------------
+# and with the below lines, it will magicly work.
+#
+# Here is some goobook configuration help.
+# http://pypi.python.org/pypi/goobook/1.4alpha2#configure
+
+set query_command="goobook query '%s'"
+bind editor <Tab> complete-query
+macro index,pager a "<pipe-message>goobook add<return>" "add the sender address to Google contacts"
+
+#########################################
+# ktr - Auto view emails with html in
+# them with a text browser..
+#
+# ktr - in your ~/.mailcap file add:
+# text/html;   w3m %s; nametemplate=%s.html
+# text/html;   w3m -dump %s; nametemplate=%s.html; copiousoutput
+#
+auto_view text/html
+
+#########################################
+#########################################
+# Mutt Theme and Colors
+#
+set sort=threads
+set sort_aux = 'last-date-received'
+
+set pager_index_lines=5		#You might want to increase this
+set pager_context=1
+set index_format='%4C %Z %{%b %d} %-15.15F (%4l) %s'
+set markers=no # don't put '+' at the beginning of wrapped lines
+
+# Header stuff
+ignore "Authentication-Results:"
+ignore "DomainKey-Signature:"
+ignore "DKIM-Signature:"
+hdr_order Date From To Cc
+
+ignore *
+unignore from: date subject to cc
+unignore x-mailing-list: posted-to:
+unignore x-mailer:
+
+###########################################################
+# Ivy League, Mutt colors, found at:
+# http://pthree.org/2008/10/22/ivy-league-theme-for-mutt/
+#
+
+# The chosen color selection
+# 34 - green
+# 111 - blue
+# 124 - red
+# 142 - orange
+# 193 - tan
+# 233 - black
+
+# general-doesn't-fit stuff
+color normal color193 color233
+color error color193 color124
+color markers color142 color233
+color tilde color142 color233
+color status color142 color233
+
+# index stuff
+color tree color124 color233
+color indicator color233 color193
+color index color193 color233 ~A
+color index color34 color233 ~N
+color index color34 color233 ~O
+color index color124 color233 ~F
+
+# header stuff
+color hdrdefault color124 color233
+color header color111 color233 "^Subject"
+
+# gpg stuff
+color body color34 color233 "^gpg: Good signature.*"
+color body color193 color124 "^gpg: BAD signature.*"
+color body color142 color233 "^gpg: Can't check signature.*"
+color body color142 color233 "^-----BEGIN PGP SIGNED MESSAGE-----"
+color body color142 color233 "^-----BEGIN PGP SIGNATURE-----"
+color body color142 color233 "^-----END PGP SIGNED MESSAGE-----"
+color body color142 color233 "^-----END PGP SIGNATURE-----"
+color body color142 color233 "^Version: GnuPG.*"
+color body color142 color233 "^Comment: .*"
+#color body color142 color233 "^[[:alnum:]/\+=]+[[:space:]]+$"
+
+# url, email and web stuff
+color body color111 color233 "(finger|ftp|http|https|news|telnet)://[^ >]*"
+color body color111 color233 "<URL:[^ ]*>"
+color body color111 color233 "www\\.[-.a-z0-9]+\\.[a-z][a-z][a-z]?([-_./~a-z0-9]+)?"
+color body color111 color233 "mailto: *[^ ]+\(\\i?subject=[^ ]+\)?"
+color body color111 color233 "[-a-z_0-9.%$]+@[-a-z_0-9.]+\\.[-a-z][-a-z]+"
+
+# misc body stuff
+color attachment color111 color233
+color signature color142 color233
+
+# quote levels
+color quoted color34 color233
+color quoted1 color142 color233
+color quoted2 color34 color233
+color quoted3 color142 color233
+color quoted4 color34 color233
+color quoted5 color142 color233
+color quoted6 color34 color233
+color quoted7 color142 color233
+color quoted8 color34 color233
+color quoted9 color142 color233
+
+##########################################
+# My Rolodeck :)
+set alias_file= ~/.mutt/aliases
+set sort_alias= alias
+set reverse_alias=yes
+source $alias_file
+
+########################################## 
+##########################################
+## ktr - my fucntions!
+#
+set pager_stop = yes
+set delete = yes
+set editor='vim + -c "set textwidth=72" -c "set wrap" -c "set nocp" -c "?^$"'
+
+# vim: syntax=muttrc
+### EOF ###
+
