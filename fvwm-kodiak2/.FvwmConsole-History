@@ -1,0 +1,100 @@
+surf http://google.com
+exec exec surf http://google.com
+exec exec gwibber
+exec exec twitux
+exec exec surf http://youtube.com
+exec exec surf youtbe.com
+exec exec surf youtube.com
+exec exec surf -s youtube.com
+exec exec surf youtube.com
+exec exec surf alaskausa.com
+exec exec firefox alaskausa.com
+exec exec firefox http://alaskausa.com
+exec exec firefox
+exec exec gwibber
+exec exec firefox http://muni.org
+exec exec surf https://github.com/Daenyth/pkgtools/issues/24#issuecomment-1003793
+exec exec surf https://github.com/Daenyth/pkgtools/issues/24#issuecomment-1003793
+exec exec surf https://github.com/Daenyth/pkgtools/blob/master/modules/parse.c#L107
+exec exec firefox
+exec exec gwibber
+FvwmIdent
+exec exec surf http://shoutcast.com
+exec exec firefox
+exec exec firefox
+exec exec surf
+exec exec firefox
+exec exec firefox
+exec exec firefox
+exec firefox
+exec exec firefox
+exec firefox
+exec exec firefox
+exec exec firefox
+exec exec firefox
+exec exec firefox
+exec exec firefox
+Function WindowListFunc
+Function WindowListFunc (XTerm)
+WindowList
+d
+GoSurf http://cnn.com
+move
+move
+exec exec pidgin &
+exec exec firefox
+exec exec firefox
+exec exec firefox
+exec exec firefox
+quit
+quit
+quit
+exit
+quit
+echo "test"
+echo $[w.id]
+echo "$[w.id]"
+echo $HOME
+echo `env`
+exec exec echo $[w.id]
+exec exec echo "$[w.id]"
+exec exec firefox
+echo $CLIPBOARD
+echo _=
+echo $_=
+GoSurf http://google.com
+exec exec xterm -fn 8x16
+exec exec xterm -fn 12x24
+close
+restart
+restart
+restart
+restart
+restart
+restart
+destroy
+restart
+resize
+resize
+Pick exec exec xmessage $[w.name]
+Module FvemPager: *
+Module FvwmPager
+DestroyModule FvwmPager
+DestroyModuleConfig: FvwmPager
+DestroyModuleConfig FvwmPager
+Window-Rearrange-Two-Column
+Function Window-Rearrange-Two-Column
+Function Window-Rearrange-Two-Column
+move
+move
+restart fvwm2 -f ~/tmp/fvwm25-dorothy/rc.fvwm
+read pager.fvwm
+Style "FvwmPager" Handles
+Style "FvwmPager" HandleWidth 6
+Style "FvwmPager" BorderWidth 5
+Module FvwmIden
+FvwmIdent
+destroy
+FvwmIdent
+exec exec skype
+exec exec xterm -fn 12x24 -rv

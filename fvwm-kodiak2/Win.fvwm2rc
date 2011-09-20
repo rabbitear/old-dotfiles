@@ -1,0 +1,211 @@
+#---------------------------------------------------------------------
+#-  File          : ~/.fvwm/windowdecors/simple/config
+#-  Contents      : fvwm window decoration description
+#-  Author        : Uwe Pross                                         
+#---------------------------------------------------------------------
+
+# original colors
+#SetEnv COLOR   LightYellow
+#SetEnv HICOLOR DodgerBlue
+#SetEnv FG_COLOR   Black
+#SetEnv FG_HICOLOR White
+
+#SetEnv HICOLOR firebrick
+
+
+SetEnv MaxDeskNumber 1
+#---------------------------------------------------------------------
+# ktr -removed this, old font
+#Font "-adobe-*-bold-r-*-*-14-100-*-*-m-*-*-*", \
+#-------------------------------------------------------------------------------
+#- menus
+#-------------------------------------------------------------------------------
+DestroyMenu WindowOptionsMenu
+AddToMenu WindowOptionsMenu 
++ "" Nop
++ " Iconify    %window-iconify.xpm%"	   Module Thumbnail
++ " Ident      %window-identify.xpm%"      Module FvwmIdent
++ " ScreenShot %camera.xpm%"	Function WindowScreenshot
++ "" Nop
++ " Close     %window-delete.xpm%"        Delete
++ " Kill      %window-destroy.xpm%"       Destroy
++ "" Nop
+
+DestroyMenu SurfOps
+AddToMenu SurfOps
++ "" Nop
++ "URL to clipboard" exec exec $[HOME]/.fvwm/bin/surf-to-clip.sh $[w.id]
++ "thepiratebay.com" exec exec surf "http://thepiratebay.org/"
++ "slashdot.org" exec exec surf -s "http://slashdot.org"
++ "" Nop
+DestroyMenu OtherOps
+AddToMenu OtherOps
++ "" Nop
++ "&Define WORD!    %help.xpm%"                 Exec exec $[HOME]/.fvwm/bin/lookup.sh
++ "Hello, $[USER]" Nop
++ "" Nop
+
+#-------------------------------------------------------------------------------
+#- functions
+#-------------------------------------------------------------------------------
+DestroyFunc ResizeOrRaiseOrLowerFunc
+AddToFunc ResizeOrRaiseOrLowerFunc C Raise
++ M Resize
++ D Lower
+
+DestroyFunc MoveOrRaiseOrLowerFunc
+AddToFunc MoveOrRaiseOrLowerFunc
++ I Raise
+# + I Current (!Raised) Raise
+# + C TestRc (NoMatch) Lower
++ M Move
++ D Maximize 100 100
+
+
+## ktr - taken from traviso's fvwmrc
+#####
+## Name:     WheelToggleShade
+## Bound:    Mouse Buttons 4 and 5 (wheel up and down) on Titlebars
+## Purpose:  Shade or unshade the window when the Mouse wheel is rolled up or
+##           down on the Titlebar. Rolling the Wheel up calls the Function with
+##           argument `True` and rolling it down uses `False`, so rolling the wheel
+##           down when the window isnt shaded has no effect, which I like :)
+##
+##################
+DestroyFunc WheelToggleShade
+AddToFunc WheelToggleShade D WindowShade $0
+
+#####
+## Name:     DestroyOnHold
+## Bound:    Titlebar Button 2 (X)
+## Purpose:  When clicked, Raise the window Immediately.
+##           If the button is pressed and released, Close the Window. 
+##           If it is pressed
+##           and held, Destroy it, and issue a Beep to confirm.
+##
+##           There is a 100ms delay before issuing `Close` so I 
+##           have a chance to see the
+##           animation when the button changes from ActiveDown to ActiveUp :).
+##
+##################
+DestroyFunc DestroyOnHold
+AddToFunc DestroyOnHold I Raise
++ C Schedule 100 Close
++ H Destroy
++ H Beep
+
+SetEnv APP_NAME *
+Style $[APP_NAME] !Button 3, !Button 5, !Button 7, \
+    !Button 4, !Button 6, !Button 8
+Style "surf" Button 3, Button 5, Button 7, !Button 4, !Button 6, !Button 8
+
+#SetEnv APP_NAME XTerm
+#Style "XTerm" UseStyle XTermStyle
+
+#-------------------------------------------------------------------------------
+#- mouse defs
+#-------------------------------------------------------------------------------
+## title bar + 2 decoration buttons
+Mouse ($[APP_NAME]) 1 T A Function MoveOrRaiseOrLowerFunc
+Mouse ($[APP_NAME]) 2 T A WindowShade
+Mouse ($[APP_NAME]) 3 T A RaiseLower
+Mouse ($[APP_NAME]) 4 T A Function WheelToggleShade True
+Mouse ($[APP_NAME]) 5 T A Function WheelToggleShade False
+
+## window title buttons
+Mouse ($[APP_NAME]) 1 1 A Menu WindowOptionsMenu Delete
+
+# ktr - surf what is on the clipboard at the time you press the button.
+#Mouse (surf) 1 3 A Menu SurfOps
+Mouse ($[APP_NAME]) 1 3 A Function GoSurf http://google.com
+Mouse ($[APP_NAME]) 1 5 A Function SurfNav -1
+Mouse ($[APP_NAME]) 1 7 A Function SurfNav 1
+
+# ktr - XTerm Style maximize grow vertical
+Mouse ($[APP_NAME]) 1 6 A Maximize 0 grow 
+Mouse ($[APP_NAME]) 1 8 A Maximize grow 0
+
+# end of ktr stuff
+Mouse ($[APP_NAME]) 1 2 A Function Thumbnail
+Mouse ($[APP_NAME]) 2 2 A All (CurrentPage,!Fvwm*B*) Iconify on
+Mouse ($[APP_NAME]) 1 4 A Maximize 100 100
+
+## window frame and side
+Mouse ($[APP_NAME]) 1 F A Function ResizeOrRaiseOrLowerFunc
+Mouse ($[APP_NAME]) 2 F A Menu WindowOptionsMenu Nop
+Mouse ($[APP_NAME]) 3 F A RaiseLower
+
+Mouse ($[APP_NAME]) 1 S A Function MoveOrRaiseOrLowerFunc
+Mouse ($[APP_NAME]) 2 S A Menu WindowOptionsMenu Nop
+Mouse ($[APP_NAME]) 3 S A RaiseLower
+
+
+####################################
+# KEY bindings
+#
+Key Space WIFS 4  Function Thumbnail
+Key Space A    4S All (CurrentPage,!Fvwm*B*) Iconify on
+Key I WIFS     4  Function Thumbnail
+Key I A        4S All (CurrentPage,!Fvwm*B*) Function Thumbnail
+Key Space WIFS M  Function Thumbnail
+Key Space A    MS All (CurrentPage,!Fvwm*B*) Iconify on
+
+Key M WFS  4S Move 50-50w 50-50w
+Key M WFS  4  Maximize 0 100
+Key N WFS  4  Maximize 100 0
+Key C WFSI 4S Close
+
+
+# ktr - switching windows..
+Key J A 4  WindowList Root c c CurrentDesk, IconifiedAtEnd, NoGeometry, \
+               UseIconName, SelectOnRelease Super_L
+Key K A 4  WindowList Root c c CurrentDesk, IconifiedAtEnd, NoGeometry, \
+               UseIconName, SelectOnRelease Super_L
+Key J A 4S Prev (AcceptsFocus, CurrentPage) Function WindowUp
+Key K A 4S Next (AcceptsFocus, CurrentPage) Function WindowUp 
+
+# ktr - moving from pages to page..
+Key Left  A 4S Scroll -10 0
+Key Right A 4S Scroll 10 0
+Key Up	  A 4S Scroll 0 -10
+Key Down  A 4S Scroll 0 10
+
+Key 1  A 4 GotoPage 0 0  
+Key 2  A 4 GotoPage 1 0 	
+Key 3  A 4 GotoPage 0 1 	
+Key 4  A 4 GotoPage 1 1 	
+
+Key Up    A 4 PackWrapperUp
+Key Down  A 4 PackWrapperDown
+Key Left  A 4 PackWrapperLeft
+Key Right A 4 PackWrapperRight
+Key R     A M Window-Rearrange-Two-Column
+
+# ktr - starting PROGRAMS..
+Key W A 4  Exec exec ~/.fvwm/bin/surf-wikipedia.sh
+Key D A 4  Exec exec ~/.fvwm/bin/surf-google.sh
+Key G A 4  Exec exec ~/.fvwm/bin/surf-google.sh
+Key G A 4S Exec exec surf http://www.google.com
+Key R A 4S Exec exec rox
+Key S A 4  Exec exec recoll
+Key F A 4  Exec exec recoll
+Key V A 4  Menu VolumeControl Root c c
+Key R A 4  Menu RadioMenu Root c c
+Key P A 4  Menu MainMenu Root c c
+
+Key Return A 4S Exec xset r rate 175 60;xterm -tn xterm \
+		 +sb -j -s -sl 1000 -geometry 80x6 -fg lightgreen \
+                -fn 8x16 -bg darkgreen +ai &
+
+Key Return A 4  Exec xset r rate 175 60;xterm -tn xterm \
+		 +sb -j -s -sl 1000 -geometry 80x6 -fg darkgreen \
+                -fn 8x16 -bg lightgreen +ai &
+
+# ktr - misc, global wm fucntions.
+Key C A  4  Function ToggleConsole
+Key Q A  4  Restart
+Key Q A  4S Quit
+Key L A  4S Exec xscreensaver-command -0lock
+
+
+

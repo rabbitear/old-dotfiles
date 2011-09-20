@@ -1,0 +1,15 @@
+Style "FvwmPager"  Sticky, NoTitle, NoHandles, BorderWidth 4, HandleWidth 4, WindowListSkip
+*FvwmPager: Rows 2
+*FvwmPager: Columns 1
+*FvwmPager: DeskTopScale 16
+*FvwmPager: Geometry +0-0
+*FvwmPager: SmallFont 5x8
+*FvwmPager: MiniIcons
+#*FvwmPager: UseSkipList
+
+*FvwmPager: Colorset * 0
+*FvwmPager: HilightColorset * 1
+
+# suppress desktop labels
+*FvwmPager: Font none
+

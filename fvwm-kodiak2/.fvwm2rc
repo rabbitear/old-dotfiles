@@ -1,0 +1,1009 @@
+#######################################
+## Kreator's Config
+#    - usual stuff, many bits and peices from other rc's.
+#    - this tries to be very minimalistic, yet have lots of keyboard functions.
+#    - there is a conky script that is nice and minimal with this, just looks nice.
+#    - dependencies are all in the ~/.fvwm/bin scripts.
+#    - does used the 'surf' browser alot at - http://surf.suckless.org
+#    - I also like the program 'recoll' which is a local document search engine.
+######################
+
+###################
+## General Stuff ##
+###################
+ImagePath $HOME/.fvwm/Pixmap/my-icons:$HOME/.fvwm/Pixmap/wm-icons/22x22-gartoon:$HOME/.fvwm/Pixmap/wm-icons/14x14-general:$HOME/.fvwm/Pixmap/my-icons:$HOME/.fvwm/Pixmap/window-images/
+ClickTime 550
+EwmhBaseStruts 0 128 0 0
+DesktopSize     2x2
+EdgeScroll      100 100
+EdgeThickness 2
+EdgeResistance 250
+Style * EdgeMoveDelay 250
+Style * EdgeMoveResistance 250
+
+
+#############################
+## Decor & Menus & Modules ##
+#############################
+
+#####
+# -decor-
+# ktr - this decore comes mainly from the 'Stone Age' fvwm theme
+##################
+Colorset 0 fg burlywood, bg #66594b, TiledPixmap buttons/rock-beige.xpm, Tint
+Colorset 1 fg burlywood1, bg #71513E, TiledPixmap buttons/rock-ruddy.xpm, Tint
+
+AddToDecor "stoneage" BorderStyle -- !NoInset
+AddToDecor "stoneage" BorderStyle -- HiddenHandles
+AddToDecor "stoneage" BorderStyle Active   TiledPixmap buttons/rock-ruddy.xpm
+AddToDecor "stoneage" BorderStyle Inactive TiledPixmap buttons/rock-beige.xpm
+
+AddToDecor "stoneage" TitleStyle -- raised
+AddToDecor "stoneage" TitleStyle ActiveUp   TiledPixmap buttons/rock-ruddy.xpm
+AddToDecor "stoneage" TitleStyle ActiveDown TiledPixmap buttons/rock-ruddy.xpm
+AddToDecor "stoneage" TitleStyle Inactive   TiledPixmap buttons/rock-beige.xpm
+AddToDecor "stoneage" TitleStyle LeftJustified
+AddToDecor "stoneage" TitleStyle Height 25
+
++ ButtonStyle Reset
++ ButtonStyle All Pixmap empty.xpm
++ ButtonStyle All -- raised
++ AddButtonStyle 1 ActiveUp   pixmap buttons/rock_menu.xpm
++ AddButtonStyle 1 ActiveDown pixmap buttons/rock_menu.xpm
++ AddButtonStyle 1 Inactive   pixmap buttons/rock-beige.xpm
++ AddButtonStyle 2 ActiveUp   pixmap buttons/gold_min.xpm
++ AddButtonStyle 2 ActiveDown pixmap buttons/rock-beige.xpm
++ AddButtonStyle 2 Inactive   pixmap buttons/gold_min.xpm
++ AddButtonStyle 3 ActiveUp   pixmap google-16x16.png
++ AddButtonStyle 3 ActiveDown pixmap google-16x16.png
++ AddButtonStyle 3 Inactive   pixmap google-16x16.png
++ AddButtonStyle 4 ActiveUp   pixmap buttons/rock_min.xpm
++ AddButtonStyle 4 ActiveDown pixmap buttons/rock_min.xpm
++ AddButtonStyle 4 Inactive   pixmap buttons/rock-beige.xpm
++ AddButtonStyle 5 ActiveUp   pixmap mini.left2.xpm
++ AddButtonStyle 5 ActiveDown pixmap buttons/rock-beige.xpm
++ AddButtonStyle 5 Inactive   pixmap mini.left2.xpm
++ AddButtonStyle 7 ActiveUp   pixmap mini.right2.xpm
++ AddButtonStyle 7 ActiveDown pixmap buttons/rock-beige.xpm
++ AddButtonStyle 7 Inactive   pixmap mini.right2.xpm
+
+#IconFont -adobe-helvetica-medium-r-normal--10-100-75-75-p-56-iso8859-1
+#IconFont "xft:snap"
+IconFont "xft:Trebuchet MS:size=10"
+*FvwmIconMan: 1 Font -adobe-helvetica-medium-r-normal--10-100-75-75-p-56-iso8859-1
+
+MenuStyle * MenuColorset 1
+MenuStyle * BorderWidth 3
+MenuStyle * TrianglesSolid
+MenuStyle * SeparatorsShort
+MenuStyle * Hilight3DThick 
+MenuStyle * Font -b&h-lucida-bold-r-normal-sans-12-120-75-75-p-79-iso8859-1
+#MenuStyle * Font "xft:snap"
+MenuStyle * SidePic
+
+Style * Colorset 0
+Style * HilightColorset 1
+#Style * Font -adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1
+Style * Font "xft:Trebuchet MS:size=12"
+Style * BorderWidth 8
+Style * HandleWidth 8
+Style * FvwmBorder
+
+Style * UseDecor stoneage
+
+Style * IconTitleColorset 0
+Style * HilightIconTitleColorset 1
+
+*FvwmPager: Colorset * 0
+*FvwmPager: HilightColorset * 1
+# the taskbar isn't in this theme.
+Style "FvwmTaskBar" Sticky, NoTitle, NoHandles, BorderWidth 4, HandleWidth 4, WindowListSkip
+#Style "FvwmPager" Sticky, NoTitle, NoHandles, BorderWidth 5, HandleWidth 5, WindowListSkip
+#Style "FvwmPager" Sticky, NoTitle, BorderWidth 5, HandleWidth 5, WindowListSkip, \
+#    NeverFocus
+
+
+#########################
+## Styles For Non-Apps ##
+#########################
+# General Non-App Styles (New)
+Style * EdgeMoveDelay 220
+Style * EdgeMoveResistance 30
+Style * SnapAttraction 8
+Style * OpaqueMoveSize -1
+Style * IconBox 260x380-2-5, IconFill Bottom Right
+Style * ResizeOpaque 
+# ktr - use the below if resizing is taking too much time.
+Style rxvt ResizeOutline
+# General Non-App Styles (old)
+Style * SloppyFocus, MouseFocusClickRaises
+Style * SmartPlacement, CleverPlacement
+# Fvwm Appish/Modules Styles
+Style "FvwmWinList"     NoTitle
+Style "*Dialog_popup" WindowListSkip
+Style "FvwmConsole" StaysOnTop, Sticky, Title, WindowListSkip, \
+	!Handles, BorderWidth 12
+Style "FvwmPager" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
+    CirculateSkip, StaysOnBottom, FixedPosition, FixedSize, !Iconifiable, \
+    !Closable, !NeverFocus
+
+
+#####################
+## Styles for Apps ##
+#####################
+style "xclock" NoTitle, BorderWidth 0, HandleWidth 0, StaysOnBottom, \
+    Sticky, WindowListSkip
+style "xosview" NoTitle, BorderWidth 0, HandleWidth 0, StaysOnBottom, \
+    Sticky, WindowListSkip
+style "XTerm"   BorderWidth 6, Handlewidth 6, MiniIcon linux.xpm,\
+    Icon utilities-terminal.png
+Style "wireshark" MiniIcon monitoring.xpm
+Style "xcalc" MiniIcon calculator.xpm, Icon accessories-calculator.png
+Style "xmag" MiniIcon viewer.xpm
+Style "Xman" MiniIcon help.xpm
+Style "xscreensaver*" MiniIcon unknown.xpm
+Style "surf" MiniIcon surf.png
+Style "Pidgin" StartsOnPage 1 0, BorderWidth 6, !Maximizable
+Style "Buddy List" !Closable, StartsOnPage 1 0, InitialMapCommand Iconify, \
+    !Maximizable
+Style "Skype" !Closable, StartsOnPage 0 1, InitialMapCommand Iconify, \
+    !Maximizable
+Style "RADIO" !Maximizable, Icon sound1.png, InitialMapCommand Iconify
+Style "ROX-Filer" Icon paperbag.png
+Style "xdaliclock" NoTitle, BorderWidth 0, HandleWidth 0, StaysOnBottom, \
+    Sticky, WindowListSkip, !Closable, !Maximizable, !Iconifiable, NeverFocus
+Style "Conky" !Closable, StaysOnBottom, !Maximizable, !Iconifiable, NeverFocus, \
+    WindowListSkip
+
+
+###############
+## Functions ##
+###############
+
+# Init happens at Initial startup only
+AddToFunc InitFunction 
++ I Exec xscreensaver -no-splash &
++ I Exec exec dbus-launch pidgin &
++ I Desk 0 0
++ I Exec exec conky -c ~/.fvwm/conkyrc
+
+# Start happens when restart
+AddToFunc StartFunction
++ I Exec exec xsetroot -solid grey10
++ I Module FvwmEvent
++ I Module FvwmPager
+
+AddToFunc RestartFunction
++ I All (Iconic) ReThumbnail
+
+# the default EWMH Activation
+# for pidgin this is annoying...
+DestroyFunc EWMHActivateWindowFunc
+AddToFunc EWMHActivateWindowFunc 
++ I Echo "Hey EWMH Activate $[w.id] happened, ktr."
+#+ I Iconify Off
+#+ I Focus
+#+ I Raise
+#+ I WarpToWindow 50 50
+
+#that function gets called with the WindowList
+#that also assures the pointer will be at pos +80/+15 within the windows
+DestroyFunc WindowListFunc
+AddToFunc WindowListFunc
++ I WindowId $0 Iconify off
++ I WindowId $0 FlipFocus
++ I WindowId $0 Raise
++ I WindowId $0 WarpToWindow +35p +35p
+
+DestroyFunc WindowUp
+AddToFunc WindowUp
++ I Current (!Iconic) Iconify off
++ I Focus
++ I Raise
++ I WarpToWindow +30p +35p
+
+DestroyFunc MaximizeWarpTo
+AddToFunc MaximizeWarpTo
++ I Maximize 0 grow
++ I FlipFocus
++ I Raise
++ I WarpToWindow +30p +30p
+
+DestroyFunc ToggleConsole
+AddToFunc ToggleConsole
++ I All (FvwmConsole) Close
++ I TestRc (NoMatch) Module FvwmConsole -g 30x6+10-10 -fn 5x8 +sb -terminal xterm -bg midnightblue -fg blue3
+
+
+## ktr - use this later for pidgin and cheese.
+##       gimp, firefox, rox all look for current running ps.
+DestroyFunc LimitApplication
+AddToFunc   LimitApplication
++ I Any ($0, CurrentDesk) FlipFocus
++ I TestRc (NoMatch) None ($0, CurrentDesk) Exec exec $0
+
+## ktr - change the sound volumn along with the button icon.
+DestroyFunc VolumeSet
+AddToFunc VolumeSet
++ I Exec exec amixer -q -c 0 set PCM $[0]%
+#+ I SendToModule OSXDock ChangeButton "A" Icon sound$0.png
+
+##
+# Go to page function for surf
+##########################################
+DestroyFunc GoSurf
+AddToFunc GoSurf $0
++ I Exec xprop -id $[w.id] -f _SURF_GO 8s -set _SURF_GO $0
+
+DestroyFunc SurfNav
+AddToFunc SurfNav $0
++ I Exec xprop -id $[w.id] -f _SURF_NAV 8s -set _SURF_NAV $0
+
+#####
+# Screenshot Functions (uses ImageMagick)
+##########################################
+DestroyFunc WindowScreenshot
+AddToFunc   WindowScreenshot
++ I ThisWindow (!Shaded !Iconic Iconifiable) \
+  Exec import -window $[w.id] -frame -quality 100 -silent \
+  "$[HOME]/screenshot-`date +%F[%R]`.$[w.id].png"
+
+DestroyFunc PlayRadio
+AddToFunc   PlayRadio $0
++ I Exec killall mplayer
++ I Exec xterm -tn Radio +sb +ai \
+        -fn 5x7 -tn Radio \
+        -geometry 40x4 -fg grey -bg rgb:29/18/12 \
+        -T RADIO -e "mplayer $0"
+
+DestroyFunc BombWindow
+AddToFunc   BombWindow
++ I Exec aplay -q .fvwm/sounds/siren_short.wav &
++ I Delete
+
+
+#####
+# Rss Reader
+###########
+DestroyFunc Slashdot-Rss
+AddToFunc Slashdot-Rss
++ I DestroyMenu recreate Slashdot-Rss
++ I AddToMenu Slashdot-Rss
++ I PipeRead '~/.fvwm/bin/fvwm-rss.pl http://slashdot.org/slashdot.rss surf'
+
+AddToMenu Slashdot-Rss
++ DynamicPopupAction Function Craig-Rss
+
+DestroyFunc Craig-Rss
+AddToFunc Craig-Rss
++ I DestroyMenu recreate Craig-Rss
++ I AddToMenu Craig-Rss
++ I PipeRead '~/.fvwm/bin/fvwm-rss.pl http://slashdot.org/slashdot.rss surf'
+
+AddToMenu Craig-Rss
++ DynamicPopupAction Function Craig-Rss
+
+
+
+######
+# fvwm-menu-headlines
+#########################
+DestroyFunc FuncFvwmMenuHeadlines
+AddToFunc   FuncFvwmMenuHeadlines
++ I PipeRead `fvwm-menu-headlines --frontpage --site $0 --exec="surf '%u'"`
+#+ I Schedule 900000 DestroyMenu $0  # reset generated menu in 15 minutes
+
+DestroyMenu MenuHeadlines
+AddToMenu   MenuHeadlines "Headlines" Title
++ "Gimp"	Exec exec gimp
++ MissingSubmenuFunction FuncFvwmMenuHeadlines
++ "FreshMeat"  Popup freshmeat
++ "Slashdot"   Popup slashdot
++ "LinuxToday" Popup linuxtoday
++ "GNOME News" Popup gnome-news
++ "KDE News"   Popup kde-news
++ "" Nop
++ "Reset all"  FuncResetHeadlines
+
+DestroyFunc FuncResetHeadlines
+AddToFunc   FuncResetHeadlines
++ I DestroyMenu freshmeat
++ I DestroyMenu linuxtoday
++ I DestroyMenu slashdot
++ I DestroyMenu gnome-news
++ I DestroyMenu kde-news
+
+
+#####
+# Thumbnail the iconified
+###########
+DestroyFunc Thumbnail
+AddToFunc Thumbnail
++ I Raise
++ I ThisWindow (!Shaded, Iconifiable, !Iconic, !XTerm) PipeRead \
+    "xwd -silent -id $[w.id] | convert -scale 64 -frame 1x1 \
+    -mattecolor black -quality 0 xwd:- \
+    png:$[FVWM_USERDIR]/tmp/icon.tmp.$[w.id].png \
+    && echo WindowStyle IconOverride, \
+    Icon $[FVWM_USERDIR]/tmp/icon.tmp.$[w.id].png \
+    || echo Nop"
++ I Iconify
++ I WarpToWindow 15p 15p
+
+DestroyFunc DeThumbnail
+AddToFunc DeThumbnail
++ I Exec rm -f $[FVWM_USERDIR]/tmp/icon.tmp.$[w.id].png
++ I DestroyWindowStyle
+#+ I Maximize 100 100
+
+DestroyFunc ReThumbnail
+AddToFunc   ReThumbnail
++ I Iconify
++ I Function Thumbnail
+
+
+DestroyModuleConfig FvwmEvent: *
+*FvwmEvent: deiconify DeThumbnail
+
+Mouse 1 I A Iconify off
+
+
+DestroyFunc  FuncFvwmMenuColorset
+AddToFunc    FuncFvwmMenuColorset
++ I DestroyMenu recreate FvwmMenuColorset
++ I PipeRead 'echo "AddToMenu FvwmMenuColorset Colorsets Title"'
++ I PipeRead 'echo \+ \\"Reset\\" Function ChangeStyle "1 fg white, bg #c06077";  echo \\+ \\"\\" Nop'
++ I PipeRead 'while read l; do echo +\"${l/*bg /\ }\" Function ChangeStyle "$l"; done < ~/.fvwm/colorsets'
+
+DestroyFunc ChangeStyle
+AddToFunc   ChangeStyle
++ I ColorSet $* 
++ I Style * HilightColorSet $0 $*
++ I UpdateStyles
+
+##########
+# Cool Function to Rearrange windows in two columns
+#
+DestroyFunc Window-Rearrange-Two-Column
+AddToFunc Window-Rearrange-Two-Column
++ I All (CurrentPage,!Fvwm*, !gkrellm, !trayer) WindowShade off
++ I Piperead 'echo FvwmRearrange -tile -animate -resize -mn 2 -m 3p 3p `expr $[vp.width] - 3`p `expr $[vp.height] - 70`p'
+
+
+
+#################
+# The Pack Up Down Left And Right
+#
+DestroyFunc PackWindowUp
+AddToFunc PackWindowUp
++ I SetEnv low_w 0
++ I WindowId $3 Raise
++ I All (CurrentPage !Iconic AcceptsFocus \
+	!Shaded) PipeRead "test `expr $[w.y] + $[w.height]` -gt $[low_w] \
+	-a `expr $[w.y] + $[w.height]` -lt $0 \
+	-a \\( \\( $[w.x] -gt $1 -a $[w.x] -lt `expr $1 + $2` \\) \
+	    -o \\( $1 -gt $[w.x] -a $1 -lt `expr $[w.x] + $[w.width]` \\) \
+	    -o \\( $1 -le $[w.x] -a `expr $1 + $2` -ge `expr $[w.x] + $[w.width]` \\) \
+	    -o \\( $[w.x] -lt $1 -a `expr $[w.x] + $[w.width]` -gt `expr $1 + $2` \\) \
+	\\) \
+	&& echo SetEnv low_w `expr $[w.y] + $[w.height]` \
+	|| echo Nop"
++ I WindowId $3 AnimatedMove keep $[low_w]p
+#+ I WindowId $3 RefreshWindow
+
+AddToFunc PackWrapperUp I NoWindow PackWindowUp $[w.y] $[w.x] $[w.width] $[w.id]
+
+#####
+# Name:     PackWindowDown
+# Bound:    Alt+Shift+Down When a window is active.
+# Purpose:  See PackWindowUp.
+#
+#################
+DestroyFunc PackWindowDown
+AddToFunc PackWindowDown
++ I SetEnv high_w $[vp.height]
++ I WindowId $3 Raise
++ I All (CurrentPage !Iconic AcceptsFocus \
+	!Shaded) PipeRead "test $[w.y] -lt $[high_w] \
+	-a $[w.y] -gt `expr $0 + $4`  \
+	-a \\( \\( $[w.x] -gt $1 -a $[w.x] -lt `expr $1 + $2` \\) \
+	    -o \\( $1 -gt $[w.x] -a $1 -lt `expr $[w.x] + $[w.width]` \\) \
+	    -o \\( $1 -le $[w.x] -a `expr $1 + $2` -ge `expr $[w.x] + $[w.width]` \\) \
+	    -o \\( $[w.x] -lt $1 -a `expr $[w.x] + $[w.width]` -gt `expr $1 + $2` \\) \
+	\\) \
+	&& echo SetEnv high_w $[w.y] \
+	|| echo Nop"
++ I PipeRead "echo WindowId $3 AnimatedMove keep `expr $[high_w] - $4`p"
+#+ I WindowId $3 RefreshWindow
+
+AddToFunc PackWrapperDown I NoWindow PackWindowDown $[w.y] $[w.x] $[w.width] $[w.id] $[w.height]
+
+#####
+# Name:     PackWindowLeft
+# Bound:    Alt+Shift+Left When a window is active
+# Purpose:  See PackWindowUp.
+#
+# The Logic works likes this:
+#   1. Set Destination to the Left Edge
+#   2. For every window, Run these tests:
+#               + Is the Window's Right edge further _Right_ than furthest edge seen yet?
+#       And:    + Is it's Right edge Further _Left_ than Target Windows Left edge? (ie,
+#in the way)
+#           Yes:
+#                   + Does the window start inside Target Window, and end below?
+#               Or  + Does it start above, and end inside?
+#               Or  + Is it the same vertical position/height/size, or start inside and 
+#end inside?
+#               Or  + Does it start above, and end below?
+#                   Yes:
+#                       This is the new Destination.
+#                   No:
+#                       Nop
+#           No:
+#               Nop
+#   3. Move to Destination.
+#
+#################
+DestroyFunc PackWindowLeft
+AddToFunc PackWindowLeft
++ I SetEnv left_w 0
++ I WindowId $3 Raise
++ I All (CurrentPage !Iconic AcceptsFocus \
+	!Shaded) PipeRead "test `expr $[w.x] + $[w.width]` -gt $[left_w] \
+	-a `expr $[w.x] + $[w.width]` -lt $1 \
+	-a \\( \\( $[w.y] -gt $0 -a $[w.y] -lt `expr $0 + $4` \\) \
+	    -o \\( $[w.y] -lt $0 -a `expr $[w.y] + $[w.height]` -gt $0 \\) \
+	    -o \\( $[w.y] -ge $0 -a `expr $[w.y] + $[w.height]` -le `expr $0 + $4` \\) \
+	    -o \\( $[w.y] -lt $0 -a `expr $[w.y] + $[w.height]` -gt `expr $0 + $4` \\) \
+	\\) \
+	&& echo SetEnv left_w `expr $[w.x] + $[w.width]`  \
+	|| echo Nop"
++ I WindowId $3 AnimatedMove $[left_w]p keep
+#+ I WindowId $3 RefreshWindow
+
+AddToFunc PackWrapperLeft I NoWindow PackWindowLeft $[w.y] $[w.x] $[w.width] $[w.id] $[w.height]
+
+DestroyFunc PackWindowRight
+AddToFunc PackWindowRight
++ I SetEnv right_w $[vp.width]
++ I WindowId $3 Raise
++ I All (CurrentPage !Iconic AcceptsFocus \
+	!Shaded) PipeRead "test $[w.x] -lt $[right_w] \
+	-a $[w.x] -gt `expr $1 + $2` \
+	-a \\( \\( $[w.y] -gt $0 -a $[w.y] -lt `expr $0 + $4` \\) \
+	    -o \\( $[w.y] -lt $0 -a `expr $[w.y] + $[w.height]` -gt $0 \\) \
+	    -o \\( $[w.y] -ge $0 -a `expr $[w.y] + $[w.height]` -le `expr $0 + $4` \\) \
+	    -o \\( $[w.y] -lt $0 -a `expr $[w.y] + $[w.height]` -gt `expr $0 + $4` \\) \
+	\\) \
+	&& echo SetEnv right_w $[w.x] \
+	|| echo Nop"
++ I PipeRead "echo WindowId $3 AnimatedMove `expr $[right_w] - $2`p keep"
+#+ I WindowId $3 RefreshWindow
+
+AddToFunc PackWrapperRight I NoWindow PackWindowRight $[w.y] $[w.x] $[w.width] $[w.id] $[w.height]
+
+
+##################
+# Module Configs
+#
+
+# Pager for being swallowed into the buttonbar
+DestroyModuleConfig FvwmPager: *
+*FvwmPager: Colorset * 0
+*FvwmPager: HilightColorset * 1
+*FvwmPager: Font none
+*FvwmPager: DeskTopScale 64
+*FvwmPager: Geometry 90x60-5+5
+*FvwmPager: Label 0 Pager
+*FvwmPager: SmallFont 5x7
+*FvwmPager: Columns 1
+*FvwmPager: Rows 1
+*FvwmPager: Balloons 
+*FvwmPager: UseSkipList
+*FvwmPager: Balloons Pager
+
+#-------------------------------------------------------------------------------
+#- from menu file
+#-------------------------------------------------------------------------------
+
+
+# Keys for the Root Window
+Mouse 1         R       A       -
+Mouse 2         R       A       Function FvwmExpose
+Mouse 3         R       A       Exec xset r rate 175 60;xterm -tn xterm \
+		 +sb -j -s -sl 1000 -geometry 80x6 -fg green \
+                -fn 8x16 \
+                -bg rgb:29/18/12 +ai &
+
+DestroyFunc PlainDecor
+AddToFunc PlainDecor
++ I DestroyModuleConfig FvwmButtons
++ I KillModule FvwmButtons
++ I KillModule FvwmPager
++ I Colorset 0 fg $0, bg $1, TiledPixmap, Pixmap
++ I Colorset 1 fg $1, bg $0, TiledPixmap, Pixmap
++ I Style * IconTitleColorset
++ I Style * IconBackgroundColorset
++ I Style * HilightIconTitleColorset
++ I Read plain.decor
++ I Module FvwmPager 0 1
++ I Module FvwmButtons
+
+DestroyFunc SwitchDecor
+AddToFunc SwitchDecor
++ I DestroyModuleConfig FvwmButtons
++ I KillModule FvwmButtons
++ I KillModule FvwmPager
++ I Style * IconTitleColorset
++ I Style * HilightIconTitleColorset
++ I Style * IconBackgroundColorset
++ I Read $0
++ I Style FvwmButtons BorderWidth 0
++ I Module FvwmPager 0 1
++ I Module FvwmButtons
+
+AddToFunc CreateBackdropMenu
++ I PipeRead "fvwm-menu-directory -d '$0' -exec-file '^Esetroot -scale '"
+
+AddToMenu My-Backdrops
++ MissingSubmenuFunction CreateBackdropMenu
++ "Backdrops" Popup $[HOME]/.fvwm/Pixmap/backgrounds
+##################################
+## not used is from theme fvwm
+##
+AddToMenu My-Decors "Decors" Title
++       "ABC"           Function SwitchDecor abc.decor
++       "Apple Aqua"    Function SwitchDecor aqua.decor
++       "Award"         Function SwitchDecor award.decor
++       "BlueGray"      Function SwitchDecor bluegray.decor
++       "Blue Wing"     Function SwitchDecor blue_wing.decor
++       "Celtic"        Function SwitchDecor celtic.decor
++       "Emerald"       Function SwitchDecor emerald.decor
++       "Glass"         Function SwitchDecor glass.decor
++       "Gold Leaf"     Function SwitchDecor goldleaf.decor
++       "Leather"       Function SwitchDecor leather.decor
++       "Marble"        Function SwitchDecor marble.decor
++       "MWM"           Function PlainDecor #cdc7b8 #97715a
++       "Pink Pearl"    Function SwitchDecor pinkpearl.decor
++       "Purple and Silver"  Function SwitchDecor purpsilver.decor
++       "Rainbow"       Function SwitchDecor rainbow.decor
++       "Red and Gold"  Function SwitchDecor redgold.decor
++       "Silver"        Function SwitchDecor silver.decor
++       "Springtime"    Function SwitchDecor springtime.decor
++       "Starry"        Function SwitchDecor starry.decor
++       "Stone Age"     Function SwitchDecor stoneage.decor
++       "Water"         Function SwitchDecor water.decor
++       "Wine"          Function SwitchDecor wine.decor
++       "Wood"          Function SwitchDecor wood.decor
++       "Plain Decors"        Popup Fractal-Decors
+
+AddToMenu Fractal-Decors "Fractal Decors" Title
++       "Circled Vine"   Function PlainDecor #847383 #403b5b
++       "Fanar"          Function PlainDecor #cdc7b8 #97715a
++       "Old Lace"       Function PlainDecor #b197a2 #f7eecf
++       "Startdust"      Function PlainDecor #8c95b4 #3d3571
++       "Sunset Flowers" Function PlainDecor #8a9a8f #3b3d4a
++       "Swimming"       Function PlainDecor #a08895 #684f62
++       "Twist of Fate"  Function PlainDecor #938988 #364147
+ 
+
+
+# Styles for these Menus
+DestroyMenuStyle "*" 
+MenuStyle "*" BorderWidth 0, Foreground $[COLOR], \
+	background blue, HilightBack lightbrown, TitleFont "xft:Swift-18", \
+	Hilight3DOff, Font "xft:JunkYard-15", \
+	ActiveFore blue, MenuFace VGradient 128 midnightblue black
+
+######
+# Menu Definitions
+#########################
+# for Debian menu...
+# ktr - I don't use this here.. maybe later?
+Read /etc/X11/fvwm/menudefs.hook Quiet
+Read menudefs.hook Quiet
+#################################
+# Main Program Menu (key MOD-P)
+# ktr - the main menu is not used anymore
+#     - all the functionally of this is in the keyboard.
+DestroyMenu "MainMenu"
+AddToMenu "MainMenu" "[o]== Programs ==[o]" title
++ "" Nop
++ "" Nop
++ "" Nop
++ "  =Web Sites="%www.png% Popup WebMenu
++ "  =Local gui Programs!=" Popup ProgMenu
++ "" Nop
++ "" Nop
++    "Backdrops Menu"              Popup My-Backdrops
++    "Decors"%mini/mini.eye2.xpm%          Popup My-Decors
++ "" Nop
++ "" Nop
++ "Restart FVWM!"%restart.png% Restart
++ "-LOCK THE SCREEN-"%lock.png% Exec exec xscreensaver-command -lock
++ "" Nop
+################################
+# RADIO/AUDIO menu (key MOD-R)
+# ktr - this one is good.
+AddToMenu "RadioMenu" " \o/ Radio \o/ " title
++ "TunaPie!"%sound1-32x32.png% Exec exec tunapie
++ "MPD PLAYLIST"%sound.png% Exec exec xterm -fn 8x8 -bg midnightblue \
+	-fg yellow -T PLAYLIST -e ncmpcpp --host tackyapple
++ "" Nop
++ "" Nop
++ "KNBA 90.3 (Anchorage) Native"%logo_knba.png% Function PlayRadio \
+	http://pubint.ic.llnwd.net/stream/pubint_knba 
++ "KSKA 91.1 (Anchorage) NPR"%logo_kska.png% Function PlayRadio \
+        http://stream.kska.org:8290/
++ "KRUA 88.1 (College UAA)"%logo_uaa.png% Function PlayRadio \
+	 http://137.229.180.250:8000/
++ "" Nop
++ "" Nop
++ "Coast To Coast AM" Function PlayRadio \
+	http://208.53.158.48:9822
++ "" Nop
++ "WGBH 89.7 Boston" Function PlayRadio \
+	http://198.147.175.79:9000
++ "Classical 102" Function PlayRadio \
+	http://80.237.210.42:80
++ "Venice Classical Radio"%venice-radio-logo.png% Function PlayRadio \
+	http://109.123.116.202:8022
++ "" Nop
++ "SwissGroove - Jazz/Lounge"%sglogo.png% Function PlayRadio \
+	http://82.197.167.6:80
++ "Public Domain Jazz" Function PlayRadio \
+	http://82.197.167.138:80
++ "Groove Salad [aac]" Function PlayRadio \
+	http://205.234.246.42:3000
++ "" Nop
++ "181.fm chilled" Function PlayRadio \
+	http://scfire-ntc-aa02.stream.aol.com:80/stream/1092
++ "181.fm R+B" Function PlayRadio \
+	http://38.107.220.164:8022	
++ "181.fm Soul" Function PlayRadio \
+	http://38.107.220.224:8058	
++ "French Kiss FM" Function PlayRadio \
+	http://88.190.24.47:80
++ "French Kiss FM 2" Function PlayRadio \
+	http://88.190.234.233:80
++ "" Nop
++ "TLLTS: tlltsarchive.org"%logo_tllts.org% Function PlayRadio \
+        http://stream.tlltsarchive.org:8000/tllts
++ "TLLTS: lottalinuxlinks.com"%logo_tllts.png% Function PlayRadio \
+        http://stream.lottalinuxlinks.com/tllts
++ "" Nop
++ "" Nop
++ "Sound Recorder"%sound.xpm% Exec exec gnome-sound-recorder
++ "" Nop
+######################################
+# Browsers (popup from the MainMenu)
+# ktr - this needs to be cleaned up alittle
+AddToMenu WebMenu "=-=-= BOOKMARKS =-=-=" title
++ "" Nop
++ " Chromium"%chromium-32x32.png% Exec exec chromium
++ " Firefox"%firefox-32x32.png% Exec exec firefox
++ "" Nop
++ "Clipboard:Google/Youtube"%google-32x32.png% exec exec ~/.fvwm/bin/surf-google.sh
++ "My LOOKUP!"%dict.png% Exec exec ~/.fvwm/bin/clipboard-lookup
++ "" Nop
++ "" Nop
++ "craigslist.com"%craigslist-32x32.png% exec exec surf -s -p http://anchorage.craigslist.com
++ "programming-motherfucker" exec exec surf -s -p http://programming-motherfucker.com/
++ "hackerne.we"%hackerne.we.png% exec exec surf -p -s http://hackerne.ws/
++ "torrentz.eu"%torrentz.png% exec exec surf -p -s http://torrentz.eu/
++ "projecteuler.net" exec exec surf -p -s http://projecteuler.net/
++ "" Nop
++ "" Nop
+
++ "fvwm FAQ" Exec exec http://fvwm.org/documentation/faq/
++ "fvwm forums" Exec exec http://fvwmforums.org/
++ "linux.byexamples" exec exec surf -p -s http://linux.byexamples.com/
++ "DJango Book 2.0" exec exec surf -p -s http://www.djangobook.com/en/2.0/
++ "" Nop
++ "" Nop
++ "" Nop "  j.o.b.s.  " title
++ "www.careers.ch2m.com"%jobs.png% Exec surf -p -s http://www.careers.ch2m.com
++ "www.jobs.state.ak.us"%jobs.png% Exec surf -p -s http://www.jobs.state.ak.us/
++ "" Nop
++ "" Nop
++ "Git Wiki FAQs"%git1.png% exec exec surf -s -p https://git.wiki.kernel.org/index.php/GitFaq
++ "Everyday Git"%git2.png% exec exec surf -s -p http://www.kernel.org/pub/software/scm/git/docs/everyday.html#Repository%20Administration
++ "" Nop
++ "" Nop
++ "create social networking site" exec exec surf -p -s http://uswaretech.com/blog/2009/03/create-a-new-social-networking-site-in-few-hours-using-pinax-platform-django/
+AddToMenu GamesMenu " ==== GAMES ==== " title
++ "" Nop
++ "powermanga" exec exec powermanga
++ "xpenguins" exec exec xpenguins
++ "penguin-command" exec exec penguin-command
++ "wesnoth" exec exec wesnoth
++ "wormux" exec exec wormux
++ "pingus" exec exec pingus
++ "lincity-ng" exec exec lincity-ng
++ "freeciv" exec exec freeciv
++ "" Nop
+######################################
+# Programs (popup from the MainMenu)
+#
+AddToMenu ProgMenu " =-=-= Programs! =-=-= " title
++ "The HELP Page" HELPMENU
++ "" Nop
++ "  The Gimp" Exec exec gimp
++ "  LibreOffice" Exec exec libreoffice
++ "" Nop
++ "  CHEESE!" Exec exec cheese
++ "  VideoLan" Exec exec vlc
++ "" Nop
++ "  Pidgin" Exec exec dbus-launch pidgin
++ "" Nop
++ "=Games Menu=" Popup GamesMenu
+
+
+#################################
+# Volume Control (key is MOD-V)
+#
+DestroyMenu VolumeControl
+AddToMenu VolumeControl 
++ "100%" Function VolumeSet 100
++ "90%" Function VolumeSet 90
++ "80%" Function VolumeSet 80
++ "70%" Function VolumeSet 70
++ "60%" Function VolumeSet 60
++ "50%" Function VolumeSet 50
++ "40%" Function VolumeSet 40
++ "30%" Function VolumeSet 30
++ "20%" Function VolumeSet 20
++ "10%" Function VolumeSet 10
++ "0%" Function VolumeSet 0
+
+
+DestroyMenu WindowOptionsMenu
+AddToMenu WindowOptionsMenu 
++ " Help Page  %help.xpm%"              HELPMENU
++ "" Nop
++ " Iconify    %window-iconify.xpm%"	   Module Thumbnail
++ " Ident      %window-identify.xpm%"      Module FvwmIdent
++ " ScreenShot %camera.xpm%"	Function WindowScreenshot
++ "" Nop
++ " Close     %window-delete.xpm%"        Delete
++ " Kill      %window-destroy.xpm%"       Destroy
++ "" Nop
+
+
+
+##############################
+## some window functions
+##
+DestroyFunc ResizeOrRaiseOrLowerFunc
+AddToFunc ResizeOrRaiseOrLowerFunc C Raise
++ M Resize
++ D Lower
+
+DestroyFunc MoveOrRaiseOrLowerFunc
+AddToFunc MoveOrRaiseOrLowerFunc
++ I Raise
+# + I Current (!Raised) Raise
+# + C TestRc (NoMatch) Lower
++ M Move
++ D Maximize 100 100
+
+DestroyFunc WheelToggleShade
+AddToFunc WheelToggleShade D WindowShade $0
+
+
+#-------------------------------------------------------------------------------
+#- mouse defs
+#-------------------------------------------------------------------------------
+SetEnv APP_NAME *
+## title bar + 2 decoration buttons
+Mouse ($[APP_NAME]) 1 T A Function MoveOrRaiseOrLowerFunc
+Mouse ($[APP_NAME]) 2 T A WindowShade
+Mouse ($[APP_NAME]) 3 T A RaiseLower
+Mouse ($[APP_NAME]) 4 T A Function WheelToggleShade True
+Mouse ($[APP_NAME]) 5 T A Function WheelToggleShade False
+
+## window title buttons
+Mouse ($[APP_NAME]) 1 1 A Menu WindowOptionsMenu Delete
+
+# ktr - surf what is on the clipboard at the time you press the button.
+#Mouse (surf) 1 3 A Menu SurfOps
+Mouse ($[APP_NAME]) 1 3 A Function GoSurf http://google.com
+Mouse ($[APP_NAME]) 1 5 A Function SurfNav -1
+Mouse ($[APP_NAME]) 1 7 A Function SurfNav 1
+
+# end of ktr stuff
+Mouse ($[APP_NAME]) 1 2 A Function Thumbnail
+Mouse ($[APP_NAME]) 2 2 A All (CurrentPage,!Fvwm*B*) Iconify on
+
+## window frame and side
+Mouse ($[APP_NAME]) 1 F A Function ResizeOrRaiseOrLowerFunc
+Mouse ($[APP_NAME]) 2 F A RaiseLower
+Mouse ($[APP_NAME]) 3 F A Menu WindowOptionsMenu Nop
+aiseLower
+
+Mouse ($[APP_NAME]) 1 S A Function MoveOrRaiseOrLowerFunc
+Mouse ($[APP_NAME]) 2 S A RaiseLower
+Mouse ($[APP_NAME]) 3 S A Menu WindowOptionsMenu Nop
+
+
+
+
+########################################
+##                                    ##     
+##             Key Commands           ##
+##                                    ##
+########################################
+
+####################################
+# KEY bindings
+#
+Key Space WIFS 4  Function Thumbnail
+Key Space A    4S All (CurrentPage,!Fvwm*B*) Iconify on
+Key I WIFS     4  Function Thumbnail
+Key I A        4S All (CurrentPage,!Fvwm*B*) Function Thumbnail
+Key Space WIFS M  Function Thumbnail
+Key Space A    MS All (CurrentPage,!Fvwm*B*) Iconify on
+
+Key M WFS  4S Move 50-50w 50-50w
+Key M WFS  4  Maximize 0 100
+Key N WFS  4  Maximize 100 0
+Key C WFSI 4S Close
+
+
+# ktr - switching windows..
+Key J A 4  WindowList Root c c CurrentDesk, IconifiedAtEnd, NoGeometry, \
+               UseIconName, SelectOnRelease Super_L
+Key K A 4  WindowList Root c c CurrentDesk, IconifiedAtEnd, NoGeometry, \
+               UseIconName, SelectOnRelease Super_L
+Key J A 4S Prev (AcceptsFocus, CurrentPage) Function WindowUp
+Key K A 4S Next (AcceptsFocus, CurrentPage) Function WindowUp 
+
+# ktr - moving from pages to page..
+Key Left  A 4S Scroll -10 0
+Key Right A 4S Scroll 10 0
+Key Up	  A 4S Scroll 0 -10
+Key Down  A 4S Scroll 0 10
+
+Key 1  A 4 GotoPage 0 0  
+Key 2  A 4 GotoPage 1 0 	
+Key 3  A 4 GotoPage 0 1 	
+Key 4  A 4 GotoPage 1 1 	
+
+Key Up    A 4 PackWrapperUp
+Key Down  A 4 PackWrapperDown
+Key Left  A 4 PackWrapperLeft
+Key Right A 4 PackWrapperRight
+Key R     A M Window-Rearrange-Two-Column
+
+# ktr - starting PROGRAMS..
+Key W A 4  Exec exec ~/.fvwm/bin/surf-wikipedia.sh
+Key D A 4  Exec exec ~/.fvwm/bin/surf-google.sh
+Key G A 4  Exec exec ~/.fvwm/bin/surf-google.sh
+Key G A 4S Exec exec surf http://www.google.com
+Key R A 4S Exec exec rox
+Key S A 4  Exec exec recoll
+Key F A 4  Exec exec recoll
+Key V A 4  Menu VolumeControl Root c c
+Key R A 4  Menu RadioMenu Root c c
+Key B A 4  Menu WebMenu Root c c
+Key B A 4S Menu ProgMenu Root c c
+
+Key Return A 4S Exec xset r rate 175 60;xterm -tn xterm \
+         +sb -j -s -sl 1000 -geometry 73x23 -fg lightgreen \
+                -fn 12x24 -bg black +ai &
+
+Key Return A 4  Exec xset r rate 175 60;xterm -tn xterm \
+         +sb -j -s -sl 1000 -geometry 80x6 -fg darkgreen \
+                -fn 8x16 -bg lightgreen +ai &
+
+# ktr - misc, global wm fucntions.
+Key C A  4  Function ToggleConsole
+Key Q A  4  Restart
+Key Q A  4S Quit
+Key L A  4S Exec xscreensaver-command -0lock
+
+Key P A  4  HELPMENU
+Key O A  4  HELPMENU
+Key Z A  4  HELPMENU
+Key F1 A N  HELPMENU
+Key MENU A N HELPMENU
+
+DestroyFunc HELPMENU
+AddToFunc HELPMENU
++ I DestroyModuleConfig HELPMENU: *
++ I *HELPMENU: Font "Shadow=0 b bl r br r :xft:DejaVu Sans:size=9:bold"
++ I *HELPMENU: ButtonFont "xft:DejaVu Sans:size=9:bold"
++ I *HELPMENU: Colorset 9
++ I *HELPMENU: ItemColorset 9
++ I *HELPMENU: Line center
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "=-=-=-=-=-=-=-= PROGRAMS TO RUN =-=-=-=-=-=-=-="
++ I *HELPMENU: Line center
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "MOD+Shift+Return  :  XTERM"
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "MOD+G or W  :  GOOGLE/Youtube or Wikipedia Clipboard"
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "MOD+Shift+G  :  GOOGLE with javascript"
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "MOD+S or F  :  SEARCH localhost DOCs"
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "MOD+D  :  Local DICTIONARY Word Lookup"
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "MOD+Shift+R  :  ROX"
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "MOD+R  :  Net RADIO Stations"
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "MOD+V  :  VOLUME Control"
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "MOD+[Shift]+B  :  BOOKMARKS and programs"
++ I *HELPMENU: Line center
++ I *HELPMENU: Line center
++ I *HELPMENU: Line center
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "=-=-=-=-=-=-= WINDOWS MANAGEMENTS =-=-=-=-=-=-="
++ I *HELPMENU: Line center
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "MOD+[Shift]+J or K  :  Jump or Climb to Other Window"
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "MOD+Space or I  :  ICONIFY/Thumbnail the Window"
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "MOD+Shift+Space or I  :  CLEAR OFF the Desktop!"
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "MOD+M or N  :  MAXIMIZE Window (up/down or left/right)"
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "MOD+Shift+M  :  Put the Window in the MIDDLE of Screen"
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "MOD+[AnyArrows]  :  Pack Window in that direction"
++ I *HELPMENU: Line center
++ I *HELPMENU: Line center
++ I *HELPMENU: Line center
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "=-=-=-=-= MISCELLANEOUS FUNCTIONS =-=-=-=-=-=-="
++ I *HELPMENU: Line center
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "MOD+Q  :  Restart fvwm"
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "MOD+L  :  LOCK Screen"
++ I *HELPMENU: Line center
++ I *HELPMENU: Text "MOD+C  :  Toggle a FvwmConsole"
++ I *HELPMENU: Line center
++ I *HELPMENU: Line center
++ I *HELPMENU: Button quit " OK " ^[
++ I *HELPMENU: Command Nop
++ I *HELPMENU: Line center
++ I *HELPMENU: Line center
++ I Module FvwmForm HELPMENU
+Style "HELPMENU" NoTitle
+
+########################################
+##                                    ##
+##          End of Key Commands       ##
+##                                    ##
+########################################
+
+
+################
+# ktr - stragguler styles
+#       Which buttons are in the titles.
+Style $[APP_NAME] !Button 3, !Button 5, !Button 7, \
+    !Button 4, !Button 6, !Button 8
+Style "surf" Button 3, Button 5, Button 7, !Button 4, !Button 6, !Button 8
+
+#SetEnv APP_NAME XTerm
+#Style "XTerm" UseStyle XTermStyle
+
+Style "XTerm" NoTitle
+Style "Pidgin" NoTitle
+Style "Chromium" NoTitle
+Style "LibreOffice" NoTitle
+Style "surf" Title
+Style "ROX-Filer" Title
+Style "Cheese" NoTitle
+Style "Firefox" NoTitle
+Style "Wireshark" NoTitle
+Style "Recoll" NoTitle
+Style "FvwmPager" Sticky, NoTitle, BorderWidth 7, HandleWidth 7, WindowListSkip, \
+    NeverFocus, Borders, !Handles
+
+### eof ###

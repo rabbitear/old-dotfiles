@@ -1,0 +1,115 @@
+# Resources for Modules
+#*FvwmPagerBack #150525
+
+#Style "FvwmPager*"     BorderWidth 0, WindowListSkip, \
+#NoTitle, NoHandles, Sticky, Colorset 10, ParentalRelativity
+
+#Style "FvwmPager*"  Sticky, NoTitle, NoHandles, BorderWidth 5, HandleWidth 5, WindowListSkip
+
+
+Style "FvwmIconMan*"     BorderWidth 0, WindowListSkip, \
+NoTitle, HandleWidth 0, Sticky
+
+Style "WestDock*" StaysOnBottom, BorderWidth 0, WindowListSkip, \
+NoTitle, HandleWidth 0, Sticky, CirculateSkip
+
+# background was rgb:29/18/12
+DestroyModuleConfig FvwmIconMan: *
+*FvwmIconMan: NumManagers 1
+*FvwmIconMan: Title "..."
+*FvwmIconMan: Resolution  page
+*FvwmIconMan: Colorset 9
+*FvwmIconMan: Font        "xft:JunkYard-9"
+*FvwmIconMan: Format      "%t"
+*FvwmIconMan: UseWinList  true
+*FvwmIconMan: DrawIcons   false
+*FvwmIconMan: Shape	  false
+*FvwmIconMan: FollowFocus true
+*FvwmIconMan: Sort        none
+*FvwmIconMan: PlainButton           flat indianred yellow
+*FvwmIconMan: SelectButton          flat indianred $[ROOT_BG]
+*FvwmIconMan: FocusButton           flat darkkhaki $[ROOT_BG]
+*FvwmIconMan: FocusAndSelectButton  flat darkkhaki $[ROOT_BG]
+*FvwmIconMan: TitleButton           flat indianred $[ROOT_BG]
+*FvwmIconMan: ReliefThickness 0
+*FvwmIconMan: ButtonGeometry 415x0
+*FvwmIconMan: ManagerGeometry 1x3+267+0
+*FvwmIconMan: Action Mouse 0 A sendcommand Function Thumbnail
+
+# Pager for being swallowed into the buttonbar
+DestroyModuleConfig FvwmPager: *
+*FvwmPager: Colorset * 0
+*FvwmPager: HilightColorset * 1
+*FvwmPager: BalloonColorset * 11
+*FvwmPager: WindowColorset 10 11
+*FvwmPager: Font none
+*FvwmPager: DeskTopScale 64
+*FvwmPager: Geometry 118x31+0+0
+*FvwmPager: Label 0 Pager
+*FvwmPager: SmallFont 5x7
+*FvwmPager: Columns 1
+*FvwmPager: Rows 1
+*FvwmPager: Balloons 
+*FvwmPager: UseSkipList
+*FvwmPager: Balloons Pager
+
+############################################
+
+#####
+# FvwmPager
+###########
+Style "FvwmPager" NoTitle, !Handles, !Borders, Sticky, WindowListSkip, \
+  CirculateSkip, StaysOnBottom, FixedPosition, FixedSize, !Iconifiable
+
+
+############################################
+
+
+
+
+# FvwmIdent is an xwininfo replacement.
+DestroyModuleConfig FvwmIdent: *
+*FvwmIdent: Back MidnightBlue
+*FvwmIdent: Fore #f6f6f6
+*FvwmIdent: Font "xft:snap"
+
+# the button bar at the top
+Style "WestDock*" StaysOnBottom
+DestroyModuleConfig WestDock: *
+*WestDock: ButtonGeometry 32x32
+*WestDock: Colorset 9
+*WestDock: Rows 1
+*WestDock: Frame 0
+*WestDock: Padding 0 0
+*WestDock: (1x1, Swallow "xeyes" `Exec exec xeyes -center $[ROOT_FG] \
+	-fg black -geometry -2000-2000`, Action (Mouse 0) \
+	`Menu MainMenu Rectangle +$left+33 0 0m`)
+*WestDock: (1x1, Icon rhythmbox.png, \
+	PressIcon rhythmbox-flip.png, \
+	ActiveIcon rhythmbox-flip.png, \
+	Action (Mouse 0) `Menu RadioMenu Rectangle +$left+33 0 0m`)
+*WestDock: (1x1, Icon referencer.png, \
+	PressIcon referencer-dim15.png, \
+	ActiveIcon referencer-dim30.png, \
+	Action (Mouse 1) `exec exec ~/.fvwm/bin/surf-google.sh`, \
+	Action (Mouse 2) `Menu WebMenu Rectangle +$left+33 0 0m`, \
+	Action (Mouse 3) `Exec exec firefox http://slashdot.org/`)
+*WestDock: (1x1, Icon utilities-terminal.png, \
+	PressIcon utilities-terminal-dim15.png, \
+	ActiveIcon utilities-terminal-dim30.png,\
+	Action (Mouse 0) `Module FvwmConsole -g 30x6+10-10 -fn 8x8 +sb -terminal xterm -bg sienna4 -fg indianred2`)
+*WestDock: (1x1, Icon sound1.png, \
+	Action (Mouse 0) `Menu VolumeControl Rectangle +$left+33 0 0m`)
+*WestDock: (16x1, Swallow "FvwmIconMan" `FvwmIconMan`)
+*WestDock: (3x1, NoKill, Swallow "stalonetray" `Exec exec stalonetray \
+	--no-shrink --transparent --grow-gravity NE --icon-size 16 \
+	--icon-gravity NE`)
+*WestDock: (5x1, NoKill, Swallow "xdaliclock" `Exec exec \
+	xdaliclock -24 -seconds -builtin0 -transparent -memory high \
+	-fg $[ROOT_FG] -geometry -2000-2000`, \
+	Action (Mouse 0) `Exec exec xterm -g 21x9-0+32 -fg yellow \
+	-bg purple -e "cal;read"`)
+*WestDock: (2x1, Swallow "FvwmPager" `FvwmPager *`)
+*WestDock: (1x1, padding 5 5, Swallow "xload" `Exec exec xload \
+	-geometry -2000-2000 -bg black -fg blue -hl green -update 1 -nolabel -jumpscroll 1`)
+

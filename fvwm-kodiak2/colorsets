@@ -1,0 +1,333 @@
+#                    COLORSETS USED BY FVWM-THEMES
+#
+#This file includes the default colors@ component file (I, II, III and IV) and
+#some comments on where these colorsets are used (V and VI). fvwm-themes uses
+#internally colorsets 0 to 39, some colorsets are reserved for the future use.
+#So, a user can freely use colorsets starting from 40 (for example, in his
+#colors-extra@ component) if he ever needs any additional colorsets.
+#
+#Colorset N |          Meaning           |           Usage Examples
+#-----------+----------------------------+-------------------------------------
+#         0 | default                    | feedback windows, FvwmScroll
+#         1 | inactive window            | window/icon titles, windows in Pager
+#         2 | active window              | window/icon titles, windows in Pager
+#         3 | inactive borders           | window borders (may copy 1)
+#         4 | active borders             | window borders (may copy 2)
+#         5 | inactive menu item         | menus (may have pixmap or gradient)
+#         6 | active menu item           | menus (only bg/fg used)
+#         7 | greyed menu item           | menus (only fg used)
+#         8 | reserved                   | for the fvwm-themes future use
+#         9 | reserved                   | for the fvwm-themes future use
+#        10 | modules, default           | Button Bar, Pager, other modules
+#        11 | modules, default hilight   | Button Bar
+#        12 | modules, special           | gradient for IconMan/IconBox
+#        13 | modules, swallowed apps    | bg, fg, sh, hi for xclock/xload etc.
+#        14 | modules, default #2        | alternative for Pager, Button Bar
+#        15 | modules, default hilight #2| alternative for Pager
+#        16 | modules, balloons          | TaskBar, Pager
+#        17 | modules, winlist, standard | item of IconMan, WinList, TaskBar
+#        18 | modules, winlist, active   | --.--
+#        19 | modules, winlist, iconified| --.--
+#        20 | modules, winlist, pointed  | --.--
+#        21 | modules, ident             | FvwmIdent
+#        22 | modules, console           | FvwmConsole
+#        23 | modules, transparent       | Button Bar
+#        24 | modules, reserved          | for the fvwm-themes future use
+#        25 | modules, reserved          | for the fvwm-themes future use
+#        26 | reserved                   | for the fvwm-themes future use
+#        27 | reserved                   | for the fvwm-themes future use
+#        28 | reserved                   | for the fvwm-themes future use
+#        29 | dynamical/temporary        | tools for choosing/previewing colors
+#        30 | regular terminal           | xterm/rxvt or any other terminal
+#        31 | admin terminal             | terminal for root (su)
+#        32 | remote terminal            | terminal with ssh/rsh/telnet
+#        33 | viewer terminal            | man, less, tail -f
+#        34 | console application        | top, editor
+#        35 | dialog main area           | FvwmScript, FvwmForm, xmessage
+#        36 | dialog text area           | FvwmScript, FvwmForm, xmessage
+#        37 | reserved                   | for the fvwm-themes future use
+#        38 | reserved                   | for the fvwm-themes future use
+#        39 | reserved                   | for the fvwm-themes future use
+
+# ****************************************************************************
+#
+# I.   FVWM Colorsets (0 to 9)
+#       I.1. Default Colorsets
+#       I.2. Window Decorations
+#       I.3. Menu Colorsets
+#
+# II.  Module Colorsets (10 to 29)
+#       II.1. Common Colorsets
+#       II.2. Window List Module Colorsets
+#       II.3. Other Module Colorsets
+#       II.4. External Colorsets
+#
+# III. Application Colorsets (30 to 35)
+#
+# IV.  Start/Stop functions
+#
+# V.   Module Configurations (under modules/)
+#
+# VI.  Miscellaneous Configurations
+# 
+# ****************************************************************************
+
+# ============================================================================
+# I. FVWM Colorsets
+# ============================================================================
+
+# ----------------------
+# I.1. Default Colorsets
+# ----------------------
+
+# for feedback windows (like geometry window and NoteMessage) and FvwmScroll
+#
+Colorset 0 fg black, bg #70A0A0
+
+# -----------------------
+# I.2. Window Decorations
+# -----------------------
+
+# The following colors are used in FvwmPager for the window colors
+# and in a title bar of windows (shade/hilight colors, computed from
+# the bg color, but might be specified directly by sh and hi).
+# The title bar background is defined below using TitleStyle.
+
+# window title, inactive and active
+#
+Colorset 1 fg black, bg rgb:88/7C/66, Plain, NoShape
+Colorset 2 fg black, bg rgb:CC/BA/99, Plain, NoShape
+
+# window borders, inactive and active
+#
+Colorset 3 fg black, bg rgb:88/7C/66, Plain, NoShape
+Colorset 4 fg black, bg rgb:CC/BA/99, Plain, NoShape
+
+# background for window title, buttons and border
+#
+DestroyFunc FuncFvwmDecorBackground
+AddToFunc   FuncFvwmDecorBackground
++ I TitleStyle ActiveUp   (Solid rgb:CC/BA/99 -- Raised)
++ I TitleStyle ActiveDown (Solid rgb:CC/BA/99 -- Raised)
++ I TitleStyle Inactive   (Solid rgb:88/7C/66 -- Raised)
++ I TitleStyle ToggledActiveUp   (Solid rgb:CC/BA/99 -- Raised)
++ I TitleStyle ToggledActiveDown (Solid rgb:CC/BA/99 -- Raised)
++ I TitleStyle ToggledInactive   (Solid rgb:88/7C/66 -- Raised)
+
++ I ButtonStyle All Pixmap 16x16/empty.xpm
++ I ButtonStyle All -- UseTitleStyle
+
+# -------------------
+# I.3. Menu Colorsets
+# -------------------
+
+# inactive menu item fg+bg and menu face if any
+#
+Colorset 5 fg black, bg rgb:80/98/B0, Plain, NoShape
+
+# active menu item fg+bg
+#
+Colorset 6 fg black, bg rgb:90/A9/C2, Plain, NoShape
+
+# greyed menu item fg
+#
+Colorset 7 fg grey48, bg grey48, Plain, NoShape
+
+# -------------------------------------------------
+# Colorsets 8 and 9 are reserved for the future use.
+
+# ============================================================================
+# II. Module Colorsets
+# ============================================================================
+
+# ----------------------
+# II.1. Common Colorsets
+# ----------------------
+
+# default for modules
+# For FvwmButtons, FvwmPager, can be also used for FvwmIconMan, FvwmIconBox.
+#
+Colorset 10 fg black, bg rgb:80/A0/A0, Plain, NoShape
+
+# default hilight for modules
+# For hilighting a part of a button bar (some swallowed apps for example).
+#
+Colorset 11 fg black, bg white, Plain, NoShape
+
+# special or funny: a gradient or a pixmap
+# May be used in certain FvwmButtons, FvwmIconMan, FvwmIconBox.
+#
+Colorset 12 fg black, bg rgb:80/A0/A0, \
+	VGradient 20 rgb:80/A0/A0 rgb:C0/F0/F0, NoShape
+
+# swallowed window: the hilight and shadow colors should be defined
+# (-hd of xclock and -hl of xload use sh, and -hl of xclock uses hi)
+#
+Colorset 13 fg black, bg rgb:70/8C/8C, hi black, sh gray40, \
+	Plain, NoShape
+
+# default #2
+# FvwmPager or to get more colors in FvwmButtons, can be set to 10.
+#
+Colorset 14 fg black, bg rgb:80/A0/A0, Plain, NoShape
+
+# default hilight #2
+# FvwmPager or to get more colors in FvwmButtons, can be set to 11.
+#
+Colorset 15 fg black, bg rgb:C0/F0/F0, Plain, NoShape
+
+# tips/balloons (TaskBar and FvwmPager)
+#
+Colorset 16 fg black, bg rgb:F0/F0/C0, Plain, NoShape
+
+# ----------------------------------
+# II.2. Window List Module Colorsets
+# ----------------------------------
+
+# standard item
+Colorset 17 fg black, bg rgb:80/A0/A0, Plain, NoShape
+
+# active item
+Colorset 18 fg black, bg rgb:A0/C8/C8, Plain, NoShape
+
+# iconified item
+Colorset 19 fg white, bg rgb:60/78/78, Plain, NoShape
+
+# pointed item
+Colorset 20 fg black, bg rgb:88/AA/AA, Plain, NoShape
+
+# ----------------------------
+# II.3. Other Module Colorsets
+# ----------------------------
+
+# FvwmIdent
+#
+Colorset 21 fg black, bg bisque, Plain, NoShape
+
+# FvwmConsole
+#
+Colorset 22 fg white, bg rgb:00/30/60, Plain, NoShape
+
+# transparent
+#Colorset 23 fg $[fg.cs10], bg $[bg.cs10], Transparent, Plain, NoShape
+
+# ------------------------
+# II.4. External Colorsets
+# ------------------------
+
+# ----------------------------
+# reserved for modules@: 24-25
+
+# ----------------------------------
+# reserved for the future use: 26-28
+
+# temporary colorset: 29, has no static definition, used dynamically
+
+# ============================================================================
+# III. Application Colorsets
+# ============================================================================
+
+# regular terminal (xterm, rxvt, Eterm)
+#
+Colorset 30 fg white, bg rgb:00/00/50, Plain, NoShape
+
+# admin terminal (su xterm)
+#
+Colorset 31 fg white, bg rgb:00/50/50, Plain, NoShape
+
+# remote terminal (ssh, telnet)
+#
+Colorset 32 fg white, bg rgb:50/00/00, Plain, NoShape
+
+# viewer terminal (man, less, tail -f)
+#
+Colorset 33 fg white, bg rgb:00/50/00, Plain, NoShape
+
+# application run in the terminal, text editor using ft-xrdb
+#
+Colorset 34 fg rgb:FF/FF/E8, bg rgb:30/48/48, Plain, NoShape
+
+# dialog main background (FvwmScript, FvwmForm, xmessage, ft-xrdb)
+#
+Colorset 35 fg black, bg rgb:80/A0/80, Plain, NoShape
+
+# dialog text area (FvwmScript, FvwmForm, xmessage, ft-xrdb)
+#
+Colorset 36 fg black, bg rgb:A0/C8/A0, Plain, NoShape
+
+# --------------------------------------------------
+# Colorsets 37 to 39 are reserved for the future use.
+
+# ============================================================================
+# IV. Start/Stop Functions:
+# ============================================================================
+
+# These functions are executed when you enter (Start) and when you leave
+# (Stop) this component. For example, in colors@blackbox they are used to
+# set/unset a good window "transparency" style ParentalRelativity/Opacity;
+# in colors@cde and colors@luthien these functions are used for more things.
+
+DestroyFunc FuncFvwmStartColors
+AddToFunc   FuncFvwmStartColors
+
+DestroyFunc FuncFvwmStopColors
+AddToFunc   FuncFvwmStopColors
+
+# ============================================================================
+# V. Module Configurations (under modules/)
+# ============================================================================
+
+# The actual module configuration commands, including their colorset
+# settings may be found in the theme directory modules/ in files named
+# FvwmModule and FvwmModule-SubName.
+# 
+# Examples:
+# 
+# *FvwmPager-Single: Colorset * 14
+# *FvwmPager-Single: HilightColorset * 15
+# *FvwmPager-Single: WindowColorsets 1 2
+# *FvwmPager-Single: BalloonColorset * 16
+# 
+# *FvwmPager-Desker: Colorset * 14
+# *FvwmPager-Desker: HilightColorset * 15
+# *FvwmPager-Desker: WindowColorsets 1 2
+# *FvwmPager-Desker: BalloonColorset * 16
+# 
+# *FvwmIconMan: Colorset         12
+# *FvwmIconMan: IconColorset     19
+# *FvwmIconMan: PlainColorset    17
+# *FvwmIconMan: SelectColorset   20
+# *FvwmIconMan: FocusColorset    18
+# *FvwmIconMan: FocusAndSelectColorset 20
+# 
+# *FvwmButtons: Colorset 10
+# 
+# *FvwmTaskBar: Colorset 17
+# *FvwmTaskBar: FocusColorset 18
+# *FvwmTaskBar: IconColorset 19
+# *FvwmTaskBar: TipsColorset 16
+# 
+# *FvwmWinList: Colorset 17
+# *FvwmWinList: FocusColorset 18
+# *FvwmWinList: IconColorset 19
+# 
+# *FvwmIconBox: Colorset   12
+# *FvwmIconBox: IconColorset 17
+# *FvwmIconBox: IconHiColorset 18
+
+# ============================================================================
+# VI. Miscellaneous Configurations
+# ============================================================================
+
+# Application colorsets are used in menus@default and menus-programs@default,
+# functions@default, functions-appbind@default and other components.
+# 
+# Examples:
+# 
+# Module FvwmConsole -fg $[fg.cs22] -bg $[bg.cs22]
+# Exec exec xterm -fg $[fg.cs30] -bg $[bg.cs30]
+# Exec exec xterm -fg $[fg.cs31] -bg $[bg.cs31] -e su -l
+# Exec exec xterm -fg $[fg.cs32] -bg $[bg.cs32] -T "Remote" -e rsh tiger
+# Exec exec xterm -fg $[fg.cs33] -bg $[bg.cs33] -T "File Viewer" -e less "$0"
+# FvwmScript FvwmScript-ThemesCenter --text-colorset 36 --viewer-colorset 33
+# FvwmScript FvwmScript-IconBrowser --text-colorset 36 --icon-colorset 10

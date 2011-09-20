@@ -1,0 +1,63 @@
+# Tint matches my Eterms
+Colorset 0 fg cornsilk, bg #ababab, fgsh black, RootTransparent Buffer, Tint #000000 50
+Colorset 1 fg cornsilk, bg #888888, fgsh black, RootTransparent Buffer, Tint #000000 50
+
+AddToDecor "award" BorderStyle Active Colorset 1
+AddToDecor "award" BorderStyle Inactive Colorset 0
+AddToDecor "award" BorderStyle -- NoInset HiddenHandles
+
+AddToDecor "award" TitleStyle Active Colorset 1
+AddToDecor "award" TitleStyle Active MultiPixmap \
+    Main Colorset 1 \
+    LeftOfText buttons/bimetal_chevronleft.xpm \
+    UnderText (stretched) buttons/bimetal_thin_mid.xpm \
+    RightOfText buttons/bimetal_chevronright.xpm
+
+AddToDecor "award" TitleStyle Inactive Colorset 0
+AddToDecor "award" TitleStyle Inactive MultiPixmap \
+    Main Colorset 1 \
+    LeftOfText buttons/bimetal_clear_chevronleft.xpm \
+    UnderText AdjustedPixmap buttons/bimetal_clear_thin_mid.xpm \
+    RightOfText buttons/bimetal_clear_chevronright.xpm
+
+AddToDecor "award"  TitleStyle -- flat
+AddToDecor "award"  TitleStyle Centered
+AddToDecor "award"  TitleStyle Height 23
+AddToDecor "award" TitleStyle -- flat
+
++ ButtonStyle Reset
++ ButtonStyle All Pixmap empty.xpm
++ ButtonStyle All -- flat UseTitleStyle
++ AddButtonStyle 1 Active Pixmap buttons/bimetal_menu.xpm
++ AddButtonStyle 1 Inactive Pixmap buttons/minimalist_maxleft.xpm
++ AddButtonStyle 2 Active Pixmap buttons/bimetal_max.xpm
++ AddButtonStyle 2 Inactive Pixmap buttons/minimalist_max.xpm
++ AddButtonStyle 3 Active Pixmap buttons/gold_close.xpm
++ AddButtonStyle 4 Active Pixmap buttons/bimetal_min.xpm
+
+
+IconFont "Shadow=1 0 C:-adobe-helvetica-medium-r-normal--10-100-75-75-p-56-iso8859-1"
+*FvwmIconMan: 1 Font "Shadow=1 0 C:-adobe-helvetica-medium-r-normal--10-100-75-75-p-56-iso8859-1"
+Style * Font "Shadow=1 0 C:-adobe-helvetica-bold-r-normal--14-140-75-75-p-82-iso8859-1"
+
+MenuStyle * MenuColorset 1
+MenuStyle * BorderWidth 2
+MenuStyle * TrianglesSolid
+MenuStyle * Font "Shadow=1 0 C:-adobe-helvetica-bold-r-normal--12-120-75-75-p-70-iso8859-1
+MenuStyle * SidePic buttons/fvwmVert.xpm
+
+Style * IconTitleColorset 0
+Style * HilightIconTitleColorset 1
+Style * IconBackgroundColorset 0
+
+Style * UseDecor award
+Style * Colorset 0
+Style * HilightColorset 1
+Style * BorderWidth  4
+Style * HandleWidth  5
+Style * MwmBorder
+
+*FvwmPager: Colorset * 0
+*FvwmPager: HilightColorset * 1
+Style "FvwmPager" Sticky, NoTitle, NoHandles, BorderWidth 2, HandleWidth 2, WindowListSkip
+

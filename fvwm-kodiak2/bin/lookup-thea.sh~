@@ -1,0 +1,11 @@
+#!/bin/bash
+
+sdcv --non-interactive --use-dict "WordNet" "$1"
+echo -e "\033[0;1;33m"
+echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+sdcv --non-interactive --use-dict "Moby Thesaurus II" "$1"
+echo -e "\033[0;1;34m"
+echo "=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-="
+sdcv --non-interactive --use-dict "Webster's Revised Unabridged Dictionary (1913)" "$1"
+echo -e "\033[0m"
+

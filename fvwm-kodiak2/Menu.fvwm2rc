@@ -1,0 +1,248 @@
+
+
+# Keys for the Root Window
+Mouse 1         R       A       -
+Mouse 2         R       A       Function FvwmExpose
+Mouse 3         R       A       Exec xset r rate 175 60;xterm -tn xterm \
+		 +sb -j -s -sl 1000 -geometry 80x6 -fg green \
+                -fn 8x16 \
+                -bg rgb:29/18/12 +ai &
+
+DestroyFunc PlainDecor
+AddToFunc PlainDecor
++ I DestroyModuleConfig FvwmButtons
++ I KillModule FvwmButtons
++ I KillModule FvwmPager
++ I Colorset 0 fg $0, bg $1, TiledPixmap, Pixmap
++ I Colorset 1 fg $1, bg $0, TiledPixmap, Pixmap
++ I Style * IconTitleColorset
++ I Style * IconBackgroundColorset
++ I Style * HilightIconTitleColorset
++ I Read plain.decor
++ I Module FvwmPager 0 1
++ I Module FvwmButtons
+
+DestroyFunc SwitchDecor
+AddToFunc SwitchDecor
++ I DestroyModuleConfig FvwmButtons
++ I KillModule FvwmButtons
++ I KillModule FvwmPager
++ I Style * IconTitleColorset
++ I Style * HilightIconTitleColorset
++ I Style * IconBackgroundColorset
++ I Read $0
++ I Style FvwmButtons BorderWidth 0
++ I Module FvwmPager 0 1
++ I Module FvwmButtons
+
+AddToFunc CreateBackdropMenu
++ I PipeRead "fvwm-menu-directory -d '$0' -exec-file '^Esetroot -scale '"
+
+AddToMenu My-Backdrops
++ MissingSubmenuFunction CreateBackdropMenu
++ "Backdrops" Popup $[HOME]/.fvwm/Pixmap/backgrounds
+
+AddToMenu My-Decors "Decors" Title
++       "ABC"           Function SwitchDecor abc.decor
++       "Apple Aqua"    Function SwitchDecor aqua.decor
++       "Award"         Function SwitchDecor award.decor
++       "BlueGray"      Function SwitchDecor bluegray.decor
++       "Blue Wing"     Function SwitchDecor blue_wing.decor
++       "Celtic"        Function SwitchDecor celtic.decor
++       "Emerald"       Function SwitchDecor emerald.decor
++       "Glass"         Function SwitchDecor glass.decor
++       "Gold Leaf"     Function SwitchDecor goldleaf.decor
++       "Leather"       Function SwitchDecor leather.decor
++       "Marble"        Function SwitchDecor marble.decor
++       "MWM"           Function PlainDecor #cdc7b8 #97715a
++       "Pink Pearl"    Function SwitchDecor pinkpearl.decor
++       "Purple and Silver"  Function SwitchDecor purpsilver.decor
++       "Rainbow"       Function SwitchDecor rainbow.decor
++       "Red and Gold"  Function SwitchDecor redgold.decor
++       "Silver"        Function SwitchDecor silver.decor
++       "Springtime"    Function SwitchDecor springtime.decor
++       "Starry"        Function SwitchDecor starry.decor
++       "Stone Age"     Function SwitchDecor stoneage.decor
++       "Water"         Function SwitchDecor water.decor
++       "Wine"          Function SwitchDecor wine.decor
++       "Wood"          Function SwitchDecor wood.decor
++       "Plain Decors"        Popup Fractal-Decors
+
+AddToMenu Fractal-Decors "Fractal Decors" Title
++       "Circled Vine"   Function PlainDecor #847383 #403b5b
++       "Fanar"          Function PlainDecor #cdc7b8 #97715a
++       "Old Lace"       Function PlainDecor #b197a2 #f7eecf
++       "Startdust"      Function PlainDecor #8c95b4 #3d3571
++       "Sunset Flowers" Function PlainDecor #8a9a8f #3b3d4a
++       "Swimming"       Function PlainDecor #a08895 #684f62
++       "Twist of Fate"  Function PlainDecor #938988 #364147
+ 
+
+
+# Styles for these Menus
+DestroyMenuStyle "*" 
+MenuStyle "*" BorderWidth 0, Foreground $[COLOR], \
+	background blue, HilightBack lightbrown, TitleFont "xft:Swift-18", \
+	Hilight3DOff, Font "xft:JunkYard-15", \
+	ActiveFore blue, MenuFace VGradient 128 midnightblue black
+
+######
+# Menu Definitions
+#########################
+# for Debian menu...
+Read /etc/X11/fvwm/menudefs.hook Quiet
+Read menudefs.hook Quiet
+#################################
+# Main Program Menu (key MOD-P)
+#
+DestroyMenu "MainMenu"
+AddToMenu "MainMenu" "[o]== Programs ==[o]" title
++ "" Nop
++ "" Nop
++ "" Nop
++ "  =Web Sites="%www.png% Popup WebMenu
++ "  =Local gui Programs!=" Popup ProgMenu
++ "" Nop
++ "" Nop
++    "Backdrops Menu"              Popup My-Backdrops
++    "Decors"%mini/mini.eye2.xpm%          Popup My-Decors
++ "" Nop
++ "" Nop
++ "Restart FVWM!"%restart.png% Restart
++ "-LOCK THE SCREEN-"%lock.png% Exec exec xscreensaver-command -lock
++ "" Nop
+################################
+# RADIO/AUDIO menu (key MOD-R)
+#
+AddToMenu "RadioMenu" " \o/ Radio \o/ " title
++ "TunaPie!"%sound1-32x32.png% Exec exec tunapie
++ "MPD PLAYLIST"%sound.png% Exec exec xterm -fn 8x8 -bg midnightblue \
+	-fg yellow -T PLAYLIST -e ncmpcpp --host tackyapple
++ "" Nop
++ "" Nop
++ "KNBA 90.3 (Anchorage) Native"%logo_knba.png% Function PlayRadio \
+	http://pubint.ic.llnwd.net/stream/pubint_knba 
++ "KSKA 91.1 (Anchorage) NPR"%logo_kska.png% Function PlayRadio \
+        http://stream.kska.org:8290/
++ "KRUA 88.1 (College UAA)"%logo_uaa.png% Function PlayRadio \
+	 http://137.229.180.250:8000/
++ "" Nop
++ "" Nop
++ "Coast To Coast AM" Function PlayRadio \
+	http://208.53.158.48:9822
++ "" Nop
++ "WGBH 89.7 Boston" Function PlayRadio \
+	http://198.147.175.79:9000
++ "Classical 102" Function PlayRadio \
+	http://80.237.210.42:80
++ "Venice Classical Radio"%venice-radio-logo.png% Function PlayRadio \
+	http://109.123.116.202:8022
++ "" Nop
++ "SwissGroove - Jazz/Lounge"%sglogo.png% Function PlayRadio \
+	http://82.197.167.6:80
++ "Public Domain Jazz" Function PlayRadio \
+	http://82.197.167.138:80
++ "Groove Salad [aac]" Function PlayRadio \
+	http://205.234.246.42:3000
++ "" Nop
++ "181.fm chilled" Function PlayRadio \
+	http://scfire-ntc-aa02.stream.aol.com:80/stream/1092
++ "181.fm R+B" Function PlayRadio \
+	http://38.107.220.164:8022	
++ "181.fm Soul" Function PlayRadio \
+	http://38.107.220.224:8058	
++ "French Kiss FM" Function PlayRadio \
+	http://88.190.24.47:80
++ "French Kiss FM 2" Function PlayRadio \
+	http://88.190.234.233:80
++ "" Nop
++ "TLLTS: tlltsarchive.org"%logo_tllts.org% Function PlayRadio \
+        http://stream.tlltsarchive.org:8000/tllts
++ "TLLTS: lottalinuxlinks.com"%logo_tllts.png% Function PlayRadio \
+        http://stream.lottalinuxlinks.com/tllts
++ "" Nop
++ "" Nop
++ "Sound Recorder"%sound.xpm% Exec exec gnome-sound-recorder
++ "" Nop
+######################################
+# Browsers (popup from the MainMenu)
+#
+AddToMenu WebMenu "=-=-=-=-= Web =-=-=-=-=-=" title
++ "" Nop
++ " Chromium"%chromium-32x32.png% Exec exec chromium
++ " Firefox"%firefox-32x32.png% Exec exec firefox
++ "" Nop
++ "Clipboard:Google/Youtube"%google-32x32.png% exec exec ~/.fvwm/bin/surf-google.sh
++ "My LOOKUP!"%dict.png% Exec exec ~/.fvwm/bin/clipboard-lookup
++ "" Nop
++ "" Nop
++ "craigslist.com"%craigslist-32x32.png% exec exec surf -s -p http://anchorage.craigslist.com
++ "programming-motherfucker" exec exec surf -s -p http://programming-motherfucker.com/
++ "hackerne.we"%hackerne.we.png% exec exec surf -p -s http://hackerne.ws/
++ "torrentz.eu"%torrentz.png% exec exec surf -p -s http://torrentz.eu/
++ "projecteuler.net" exec exec surf -p -s http://projecteuler.net/
++ "" Nop
++ "" Nop
+
++ "fvwm FAQ" Exec exec http://fvwm.org/documentation/faq/
++ "fvwm forums" Exec exec http://fvwmforums.org/
++ "linux.byexamples" exec exec surf -p -s http://linux.byexamples.com/
++ "DJango Book 2.0" exec exec surf -p -s http://www.djangobook.com/en/2.0/
++ "" Nop
++ "" Nop
++ "" Nop "  j.o.b.s.  " title
++ "www.careers.ch2m.com"%jobs.png% Exec surf -p -s http://www.careers.ch2m.com
++ "www.jobs.state.ak.us"%jobs.png% Exec surf -p -s http://www.jobs.state.ak.us/
++ "" Nop
++ "" Nop
++ "Git Wiki FAQs"%git1.png% exec exec surf -s -p https://git.wiki.kernel.org/index.php/GitFaq
++ "Everyday Git"%git2.png% exec exec surf -s -p http://www.kernel.org/pub/software/scm/git/docs/everyday.html#Repository%20Administration
++ "" Nop
++ "" Nop
++ "create social networking site" exec exec surf -p -s http://uswaretech.com/blog/2009/03/create-a-new-social-networking-site-in-few-hours-using-pinax-platform-django/
+AddToMenu GamesMenu " ==== GAMES ==== " title
++ "" Nop
++ "powermanga" exec exec powermanga
++ "xpenguins" exec exec xpenguins
++ "penguin-command" exec exec penguin-command
++ "wesnoth" exec exec wesnoth
++ "wormux" exec exec wormux
++ "pingus" exec exec pingus
++ "lincity-ng" exec exec lincity-ng
++ "freeciv" exec exec freeciv
++ "" Nop
+######################################
+# Programs (popup from the MainMenu)
+#
+AddToMenu ProgMenu " =-=-= Programs! =-=-= " title
++ "The HELP Page" HELPMENU
++ "" Nop
++ "  The Gimp" Exec exec gimp
++ "  LibreOffice" Exec exec libreoffice
++ "" Nop
++ "  CHEESE!" Exec exec cheese
++ "  VideoLan" Exec exec vlc
++ "" Nop
++ "  Pidgin" Exec exec dbus-launch pidgin
++ "" Nop
++ "=Games Menu=" Popup GamesMenu
+
+
+#################################
+# Volume Control (key is MOD-V)
+#
+DestroyMenu VolumeControl
+AddToMenu VolumeControl 
++ "100%" Function VolumeSet 100
++ "90%" Function VolumeSet 90
++ "80%" Function VolumeSet 80
++ "70%" Function VolumeSet 70
++ "60%" Function VolumeSet 60
++ "50%" Function VolumeSet 50
++ "40%" Function VolumeSet 40
++ "30%" Function VolumeSet 30
++ "20%" Function VolumeSet 20
++ "10%" Function VolumeSet 10
++ "0%" Function VolumeSet 0
+
+### eof ###

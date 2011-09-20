@@ -1,0 +1,29 @@
+# ktr's small conky rc.
+update_interval 3
+update_interval_on_battery 5
+background
+use_xft
+font Snap:size=10
+
+alignment top_right
+gap_x 5
+gap_y 70
+maximum_width 120
+
+double_buffer yes
+own_window yes
+own_window_transparent yes
+own_window_type desktop
+
+border_width 0
+default_color burlywood4
+default_outline_color black
+default_shade_color black
+
+TEXT
+${color burlywood1}${font URW Palladio L:style=Bold:size=36}${time %I}${font URW Palladio L:style=Bold:size=22}:${time %M} ${font URW Palladio L:style=Bold:size=12}${time %p}${color}${font Snap}
+${color brown}${battery_bar 7 C1C0} 
+${color}$alignc${time %a %b %d %Y}
+${color}${loadgraph 20,120 burlywood1 burlywood4 -t}
+${color}iP AddR: ${color burlywood1}$alignr${addr eth1}
+
